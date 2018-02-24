@@ -1,5 +1,5 @@
 import harness.src.main.dao.filesystem.filesystem_dao as file_dao
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def get_fully_qualified_profile_from_filesystem(profile):
@@ -7,7 +7,7 @@ def get_fully_qualified_profile_from_filesystem(profile):
     profile (by string). The profile must live in the project/profiles directory.
     """
     profile_dictionary = file_dao.get_dictionary_by_profile(profile)
-    utils.get_fully_qualified_dictionary_values(profile_dictionary)
+    general_utils.get_fully_qualified_dictionary_values(profile_dictionary)
     return profile_dictionary
 
 

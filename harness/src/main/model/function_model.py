@@ -1,11 +1,11 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def add_unique_id(function):
     """Adds a unique id for the function when it is added to a workflow
     to support multiple copies of the same function.
     """
-    function['unique_id'] = utils.get_random_string()
+    function['unique_id'] = general_utils.get_random_string()
     return function
 
 
@@ -66,7 +66,7 @@ def named_tuple_to_function_closure(add_date):
 
     def remove_identifiers(function):
         identifiers = ['project']
-        utils.remove_dictionary_keys(function, identifiers)
+        general_utils.remove_dictionary_keys(function, identifiers)
 
     return named_tuple_to_function
 

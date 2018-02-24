@@ -2,7 +2,7 @@ import harness.src.main.dao.mongo.project_dao as mongo_dao
 import harness.src.main.dao.filesystem.filesystem_dao as file_dao
 import harness.src.main.model.project_model as project_model
 import harness.src.main.processor.component_processor as component_processor
-from pythoncommons import utils
+from pythoncommons import general_utils
 from . import generic_processor
 
 
@@ -169,7 +169,7 @@ def make_project_database_name(name):
     """Small utility function that creates a unique name for a project database.
     Returns the name.
     """
-    random_string = utils.get_random_string(length=5)
+    random_string = general_utils.get_random_string(length=5)
     database_name = name + '_' + random_string + '_' + 'project'
     return database_name
 
@@ -190,7 +190,7 @@ def make_projects_from_tuples(project_tuples):
     """Makes project records from an array of named tuples. Returns the new list
     of project dictionary objects.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     project_maker = project_model.named_tuple_to_project_closure(add_date)
     projects = list(map(project_maker, project_tuples))
     return projects

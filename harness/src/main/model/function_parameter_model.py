@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def get_inputs(parameter):
@@ -18,7 +18,7 @@ def remove_identifiers(parameter):
     with the other information about the parameter.
     """
     identifiers = ['project', 'component', 'function', 'type']
-    utils.remove_dictionary_keys(parameter, identifiers)
+    general_utils.remove_dictionary_keys(parameter, identifiers)
     return parameter
 
 
@@ -41,7 +41,7 @@ def remove_scope_identifier(function_parameter):
     """Removes the scope identifier (input or output) from the function parameter object.
     """
     identifiers = ['type']
-    utils.remove_dictionary_keys(function_parameter, identifiers)
+    general_utils.remove_dictionary_keys(function_parameter, identifiers)
     return function_parameter
 
 
@@ -49,7 +49,7 @@ def remove_function_identifier(function_parameter):
     """Removes the function identifier from the function_parameter object.
     """
     identifiers = ['function']
-    utils.remove_dictionary_keys(function_parameter, identifiers)
+    general_utils.remove_dictionary_keys(function_parameter, identifiers)
     return function_parameter
 
 

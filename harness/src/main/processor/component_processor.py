@@ -2,7 +2,7 @@ import harness.src.main.dao.filesystem.filesystem_dao as file_dao
 import harness.src.main.dao.mongo.component_dao as mongo_dao
 import harness.src.main.model.component_model as component_model
 import harness.src.main.processor.function_processor as function_processor
-from pythoncommons import utils
+from pythoncommons import general_utils
 from collections import OrderedDict
 from . import generic_processor
 
@@ -88,7 +88,7 @@ def remove_component_closure(database, parameter='id', remove_storage=True):
     def remove_component_by_id(component_id):
         """Uses the given id to remove the component. Returns the removed component.
         """
-        timestamp = utils.get_timestamp()
+        timestamp = general_utils.get_timestamp()
         component = mongo_dao.remove_component_by_id(database, component_id, timestamp)
         if remove_storage:
             storage_location = component['location']
@@ -98,7 +98,7 @@ def remove_component_closure(database, parameter='id', remove_storage=True):
     def remove_component_by_name(component_name):
         """Uses the given name to remove the component. Returns the removed component.
         """
-        timestamp = utils.get_timestamp()
+        timestamp = general_utils.get_timestamp()
         component = mongo_dao.get_current_component_by_name(database, component_name)
         component_id = component['_id']
         component = mongo_dao.remove_component_by_id(database, component_id, timestamp)
@@ -523,7 +523,7 @@ def make_components_from_tuples(component_tuples):
     """Takes component named tuples and returns them as a list of dictionaries.
     Additionally, uses an add date to indicate when the component was added.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     component_maker = component_model.named_tuple_to_component_closure(add_date)
     components = list(map(component_maker, component_tuples))
     return components

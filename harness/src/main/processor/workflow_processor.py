@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 from collections import OrderedDict
 from . import generic_processor
 import harness.src.main.model.workflow_model as workflow_model
@@ -65,7 +65,7 @@ def update_workflow_template(project, workflow, function, parameter, target, sco
     structure = workflow_model.get_workflow_structure(workflow)
     templates = mars.template.get_current_templates_by_structure_name(database, structure)
     current_template = templates[0]
-    modify_date = utils.get_timestamp()
+    modify_date = general_utils.get_timestamp()
     current_fields = mars.template.copy_template_fields(current_template)
     new_field = make_storage_field(parameter, target, scope)
     update_storage_fields(current_fields, new_field)
@@ -187,7 +187,7 @@ def make_workflows_from_tuples(workflow_tuples):
     """Takes workflow named tuples and returns them as a list of dictionaries.
     Additionally, uses an add date to indicate when the component was added.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     workflow_maker = workflow_model.named_tuple_to_workflow_closure(add_date)
     workflows = list(map(workflow_maker, workflow_tuples))
     return workflows

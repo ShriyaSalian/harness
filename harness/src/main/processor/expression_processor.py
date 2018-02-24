@@ -1,6 +1,6 @@
 import harness.src.main.model.expression_model as expression_model
 from . import generic_processor
-from pythoncommons import utils
+from pythoncommons import general_utils
 from collections import deque, OrderedDict
 from copy import deepcopy
 import re
@@ -196,7 +196,7 @@ def make_expressions_from_tuples(expression_tuples):
     """Takes a list of expression named tuples and transforms them into
     a list of expression dictionary objects.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     expression_maker = expression_model.named_tuple_to_expression_closure(add_date)
     expressions = list(map(expression_maker, expression_tuples))
     return expressions

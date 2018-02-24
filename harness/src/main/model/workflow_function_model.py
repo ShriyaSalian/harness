@@ -1,11 +1,11 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def remove_workflow_identifier(workflow_function):
     """Simple filter to remove the workflow identifer from the passed function.
     """
     identifiers = ['workflow']
-    utils.remove_dictionary_keys(workflow_function, identifiers)
+    general_utils.remove_dictionary_keys(workflow_function, identifiers)
     return workflow_function
 
 
@@ -22,10 +22,10 @@ def named_tuple_to_workflow_function_closure():
         return workflow_function
 
     def add_unique_id(workflow_function):
-        workflow_function['unique_id'] = utils.get_random_string()
+        workflow_function['unique_id'] = general_utils.get_random_string()
 
     def remove_identifiers(workflow_function):
         identifiers = ['project']
-        utils.remove_dictionary_keys(workflow_function, identifiers)
+        general_utils.remove_dictionary_keys(workflow_function, identifiers)
 
     return named_tuple_to_workflow_function

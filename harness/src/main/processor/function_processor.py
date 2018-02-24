@@ -3,7 +3,7 @@ import harness.src.main.processor.functions.compound_function_processor as compo
 import harness.src.main.processor.functions.external_function_processor as external_processor
 import harness.src.main.processor.function_parameter_processor as function_parameter_processor
 import harness.src.main.dao.mongo.function_dao as mongo_dao
-from pythoncommons import utils
+from pythoncommons import general_utils
 from collections import OrderedDict
 from . import generic_processor
 
@@ -69,7 +69,7 @@ def make_functions_from_tuples(function_tuples):
     """Takes a list of function named tuples and transforms them into a list of
     function dictionary objects.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     function_maker = function_model.named_tuple_to_function_closure(add_date)
     functions = list(map(function_maker, function_tuples))
     return functions
@@ -100,7 +100,7 @@ def create_compound_functions(component, compound_functions, source='filesystem'
                                                                      profile=profile)
     compound_functions = compound_processor.add_subfunctions_to_compound_functions(compound_functions, subfunctions)
     compound_functions = list(map(compound_processor.order_function_subfunctions, compound_functions))
-    full_function_list = utils.merge_lists([compound_functions, external_functions, internal_functions])
+    full_function_list = general_utils.merge_lists([compound_functions, external_functions, internal_functions])
     subfunction_type_assigner = compound_processor.assign_subfunction_type_closure(full_function_list)
     compound_functions = list(map(subfunction_type_assigner, compound_functions))
     compound_functions = compound_processor.assign_complexity_to_compound_functions(compound_functions)

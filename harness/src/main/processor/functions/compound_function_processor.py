@@ -1,7 +1,7 @@
 import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.model.functions.compound_function_model as compound_model
 from collections import deque, OrderedDict
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def get_empty_parameters():
@@ -411,7 +411,7 @@ def make_compound_functions_from_tuples(compound_function_tuples):
     """Takes a list of compound function named tuples and transforms them into a list of
     function dictionary objects.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     compound_function_maker = compound_model.named_tuple_to_compound_function_closure(add_date)
     compound_functions = list(map(compound_function_maker, compound_function_tuples))
     return compound_functions

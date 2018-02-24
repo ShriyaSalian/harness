@@ -1,5 +1,5 @@
 import os
-from pythoncommons import record_reader, property_reader, record_writer, subprocess_utils, directory_tools, utils
+from pythoncommons import record_reader_utils, property_reader_utils, record_writer_utils, subprocess_utils, directory_utils, general_utils
 
 
 def clone_repository(repository_info):
@@ -28,7 +28,7 @@ def file_to_properties(extension, rel_exec_path=None, rel_property_path=None):
     current_path = os.path.dirname(os.path.realpath(__file__))
     setup_file = current_path.replace(rel_exec_path, rel_property_path)
     setup_file += extension
-    properties = property_reader.make_dictionary(setup_file)
+    properties = property_reader_utils.make_dictionary(setup_file)
     return properties
 
 
@@ -42,9 +42,9 @@ def get_unique_records(record_properties, data_types=None, read_type='file'):
             elif read_type == 'directory':
                 record_properties['records_extension'] = [record_properties['base_extension'][0] +
                                                           data_type]
-            records += record_reader.get_records_as_tuples(record_properties)
+            records += record_reader_utils.get_records_as_tuples(record_properties)
     else:
-        records += record_reader.get_records_as_tuples(record_properties)
+        records += record_reader_utils.get_records_as_tuples(record_properties)
     if records and type(records) is list:
         try:
             unique_records = list(set(records))
@@ -69,7 +69,7 @@ def get_dictionary_by_profile(profile):
 def property_keywords_dictionary_closure(profile):
 
     profile_dictionary = get_dictionary_by_profile(profile)
-    utils.get_fully_qualified_dictionary_values(profile_dictionary)
+    general_utils.get_fully_qualified_dictionary_values(profile_dictionary)
 
     def replace_value(value):
         for keyword in profile_dictionary:
@@ -117,7 +117,7 @@ def get_properties_from_file(property_type=None,
 def remove_directory(directory):
     """Removes directory and subdirectories from the filesystem.
     """
-    directory_tools.remove_directory(directory)
+    directory_utils.remove_directory(directory)
     return True
 
 
@@ -125,12 +125,12 @@ def get_directory_exists(directory):
     """Returns True if the directory exists, or False if the directory does not
     exist.
     """
-    directory_exists = directory_tools.get_directory_exists(directory)
+    directory_exists = directory_utils.get_directory_exists(directory)
     return directory_exists
 
 
 def write_records(records, properties):
-    write_status = record_writer.write_records(records, properties)
+    write_status = record_writer_utils.write_records(records, properties)
     return write_status
 
 

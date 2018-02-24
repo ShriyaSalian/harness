@@ -5,7 +5,7 @@ import harness.src.main.processor.component_processor as component_processor
 import harness.src.main.processor.language_processor as language_processor
 import harness.src.main.model.evaluation_model as evaluation_model
 import harness.src.main.dao.mongo.evaluation_dao as evaluation_dao
-from pythoncommons import utils
+from pythoncommons import general_utils
 from mars import mars
 
 
@@ -15,7 +15,7 @@ def get_ordered_workflow_functions(workflow):
     """
     functions = workflow['functions']
     if functions:
-        ordered_functions = utils.sort_dictionary_list_on_key(functions, 'order')
+        ordered_functions = general_utils.sort_dictionary_list_on_key(functions, 'order')
     return ordered_functions
 
 

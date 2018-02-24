@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def update_location(expression, location):
@@ -27,6 +27,6 @@ def named_tuple_to_expression_closure(add_date):
         """Removes identifier keys from the expression dictionary.
         """
         remove_expression_keys = ['project', 'component', 'function']
-        utils.remove_dictionary_keys(expression, remove_expression_keys)
+        general_utils.remove_dictionary_keys(expression, remove_expression_keys)
 
     return named_tuple_to_expression

@@ -1,6 +1,6 @@
 import harness.src.main.model.parameter_model as parameter_model
 import harness.src.main.dao.mongo.parameter_dao as parameter_dao
-from pythoncommons import utils
+from pythoncommons import general_utils
 from mars import mars
 
 
@@ -47,7 +47,7 @@ def assemble_groups_from_structures(structures, complete=True):
     If keyword parameter 'complete' is True, adds complete structures to each group.
     If keyword parameter 'complete' is False, only adds structure names to the group.
     """
-    add_date = utils.get_timestamp()
+    add_date = general_utils.get_timestamp()
     group_names = []
     groups = []
     counter = 0

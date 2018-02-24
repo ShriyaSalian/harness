@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 import harness.src.main.model.function_model as function_model
 import harness.src.main.model.function_parameter_model as function_parameter_model
 import harness.src.main.model.workflow_parameter_model as workflow_parameter_model
@@ -9,7 +9,7 @@ def make_workflow_structure(workflow):
     """
     structure = {}
     structure['group'] = 'workflow'
-    structure['name'] = workflow['name'] + '_' + utils.get_random_string()
+    structure['name'] = workflow['name'] + '_' + general_utils.get_random_string()
     structure['description'] = 'The storage collection for the {0} workflow.'.format(workflow['name'])
     return structure
 
@@ -134,7 +134,7 @@ def add_function_to_workflow(workflow, function):
     return workflow
 
 
-def named_tuple_to_workflow_closure(add_date=utils.get_timestamp()):
+def named_tuple_to_workflow_closure(add_date=general_utils.get_timestamp()):
     """Takes a named tuple workflow object and transforms it into the dictionary
     version, removing extraneous identifiers and including metadata.
     """
@@ -166,7 +166,7 @@ def named_tuple_to_workflow_closure(add_date=utils.get_timestamp()):
 
     def remove_identifiers(workflow):
         identifiers = ['project']
-        utils.remove_dictionary_keys(workflow, identifiers)
+        general_utils.remove_dictionary_keys(workflow, identifiers)
 
     return named_tuple_to_workflow
 

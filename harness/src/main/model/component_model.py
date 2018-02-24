@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 import copy
 
 
@@ -24,11 +24,11 @@ def add_vcs_to_component_closure(vcs_dictionaries):
         remove_vcs_keys = ['name', 'success']
         if not vcs_target['success']:
             vcs_target['vcs_type'] = None
-        utils.remove_dictionary_keys(vcs_target, remove_vcs_keys)
+        general_utils.remove_dictionary_keys(vcs_target, remove_vcs_keys)
         component['vcs'] = vcs_target
         component = update_component_status(component)
         component = update_component_vcs_status(component)
-        utils.remove_dictionary_keys(component, remove_component_keys)
+        general_utils.remove_dictionary_keys(component, remove_component_keys)
 
     return add_vcs_results_to_component
 
@@ -62,7 +62,7 @@ def named_tuple_to_component_closure(add_date):
 
     def remove_identifiers(component):
         remove_identifiers = ['project']
-        utils.remove_dictionary_keys(component, remove_identifiers)
+        general_utils.remove_dictionary_keys(component, remove_identifiers)
 
     def add_dates(component):
         component['add_date'] = add_date
@@ -78,7 +78,7 @@ def remove_database_artifacts(component):
     """
     new_component = copy.deepcopy(component)
     identifiers = ['project', '_id']
-    utils.remove_dictionary_keys(new_component, identifiers)
+    general_utils.remove_dictionary_keys(new_component, identifiers)
     return new_component
 
 
@@ -87,7 +87,7 @@ def reset_component_dates(component):
     component object.
     """
     new_component = copy.deepcopy(component)
-    new_component['add_date'] = utils.get_timestamp()
+    new_component['add_date'] = general_utils.get_timestamp()
     new_component['remove_date'] = None
     return new_component
 
@@ -113,8 +113,8 @@ def update_component_vcs_closure(component):
         update_component_vcs_status(component_copy, component['vcs']['status'])
         remove_vcs_keys = ['name', 'success']
         remove_component_keys = ['_id']
-        utils.remove_dictionary_keys(component_copy['vcs'], remove_vcs_keys)
-        utils.remove_dictionary_keys(component_copy, remove_component_keys)
+        general_utils.remove_dictionary_keys(component_copy['vcs'], remove_vcs_keys)
+        general_utils.remove_dictionary_keys(component_copy, remove_component_keys)
         add_dates(component_copy)
         return component_copy
 

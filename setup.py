@@ -4,6 +4,8 @@ setup(
     packages=find_packages(),
     install_requires=[
           'flask',
+          'json',
+          'bson',
           'pythoncommons',
           'mars'
       ],

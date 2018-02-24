@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def add_evaluation_name(evaluation, evaluation_name):
@@ -9,7 +9,7 @@ def add_evaluation_name(evaluation, evaluation_name):
 
 
 def order_inputs(inputs):
-    ordered_inputs = utils.sort_dictionary_list_on_key(inputs, 'order')
+    ordered_inputs = general_utils.sort_dictionary_list_on_key(inputs, 'order')
     return ordered_inputs
 
 
@@ -49,7 +49,7 @@ def make_evaluation_function(function, info):
     return evaluation_function
 
 
-def make_evaluation_closure(workflow, template, add_date=utils.get_timestamp()):
+def make_evaluation_closure(workflow, template, add_date=general_utils.get_timestamp()):
     """Creates an evaluation record for database entry.
     """
     def make_evaluation(evaluation=None):

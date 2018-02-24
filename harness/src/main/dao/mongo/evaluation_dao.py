@@ -1,4 +1,4 @@
-from pythoncommons import mongo_utils, utils
+from pythoncommons import mongo_utils, general_utils
 
 
 def get_evaluation_collection(project):
@@ -122,7 +122,7 @@ def get_workflow_evaluations_by_name(project, workflow, name):
     arguments = []
     arguments.append(mongo_utils.make_single_field_argument('name', name))
     arguments.append(mongo_utils.make_single_field_argument('workflow', workflow))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     evaluation_list = mongo_utils.unload_cursor(cursor)
@@ -149,7 +149,7 @@ def get_current_evaluation_by_name(project, name):
     arguments = []
     arguments.append(mongo_utils.make_single_field_argument('name', name))
     arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     evaluation_list = mongo_utils.unload_cursor(cursor)

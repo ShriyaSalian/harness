@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def make_parameter_tree(groups):
@@ -9,7 +9,7 @@ def make_parameter_tree(groups):
     return parameter
 
 
-def make_group(group_name, add_date=utils.get_timestamp(), order=None):
+def make_group(group_name, add_date=general_utils.get_timestamp(), order=None):
     group = {}
     group['name'] = group_name
     group['type'] = 'group'

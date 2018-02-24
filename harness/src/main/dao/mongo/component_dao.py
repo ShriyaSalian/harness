@@ -1,4 +1,4 @@
-from pythoncommons import mongo_utils, utils
+from pythoncommons import mongo_utils, general_utils
 
 
 def get_component_collection(database):
@@ -76,7 +76,7 @@ def get_enabled_components(database, current_only=True):
     if current_only:
         arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     arguments.append(mongo_utils.make_single_field_argument('status', 'enabled'))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     component_list = mongo_utils.unload_cursor(cursor)
@@ -92,7 +92,7 @@ def get_disabled_components(database, current_only=True):
     if current_only:
         arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     arguments.append(mongo_utils.make_single_field_argument('status', 'disabled'))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     component_list = mongo_utils.unload_cursor(cursor)
@@ -109,7 +109,7 @@ def get_vcs_enabled_components(database, current_only=True):
     if current_only:
         arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     arguments.append(mongo_utils.make_single_field_argument('vcs.status', 'enabled'))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     component_list = mongo_utils.unload_cursor(cursor)
@@ -126,7 +126,7 @@ def get_vcs_disabled_components(database, current_only=True):
     if current_only:
         arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     arguments.append(mongo_utils.make_single_field_argument('vcs.status', 'disabled'))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     component_list = mongo_utils.unload_cursor(cursor)
@@ -175,7 +175,7 @@ def get_current_component_by_name(database, name):
     arguments = []
     arguments.append(mongo_utils.make_single_field_argument('name', name))
     arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
-    argument = utils.merge_list_of_dicts(arguments)
+    argument = general_utils.merge_list_of_dicts(arguments)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
     component_list = mongo_utils.unload_cursor(cursor)
