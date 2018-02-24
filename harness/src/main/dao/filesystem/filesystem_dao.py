@@ -1,5 +1,5 @@
 import os
-from python_commons import record_reader, property_reader, record_writer, subprocess_utils, directory_tools, utils
+from pythoncommons import record_reader, property_reader, record_writer, subprocess_utils, directory_tools, utils
 
 
 def clone_repository(repository_info):

@@ -1,7 +1,7 @@
 import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.model.functions.compound_function_model as compound_model
 from collections import deque, OrderedDict
-from python_commons import utils
+from pythoncommons import utils
 
 
 def get_empty_parameters():

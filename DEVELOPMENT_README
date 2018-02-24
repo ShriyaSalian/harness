@@ -98,7 +98,7 @@ From your {projects} directory, type:
 cd {projects}/{clone directory}/harness/src/main/controller
 
 (where {clone directory} is the directory you cloned the project in,
-i.e. harness, mars, pha_test_harness, python_commons, etc.)
+i.e. harness, mars, pha_test_harness, pythoncommons, etc.)
 
 Once in the controller directory, copy and paste (or type) the following:
 

@@ -1,4 +1,4 @@
-from python_commons import utils
+from pythoncommons import utils
 
 
 def remove_workflow_identifier(workflow_function):

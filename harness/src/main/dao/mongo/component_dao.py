@@ -1,4 +1,4 @@
-from python_commons import db_utils, utils
+from pythoncommons import db_utils, utils
 
 
 def get_component_collection(database):

@@ -1,5 +1,5 @@
 import harness.src.main.dao.filesystem.filesystem_dao as file_dao
-from python_commons import utils
+from pythoncommons import utils
 
 
 def get_fully_qualified_profile_from_filesystem(profile):

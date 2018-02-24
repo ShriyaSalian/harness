@@ -1,4 +1,4 @@
-from python_commons import db_utils
+from pythoncommons import db_utils
 
 
 def get_language_collection(project):

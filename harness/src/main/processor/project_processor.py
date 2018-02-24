@@ -2,7 +2,7 @@ import harness.src.main.dao.mongo.project_dao as mongo_dao
 import harness.src.main.dao.filesystem.filesystem_dao as file_dao
 import harness.src.main.model.project_model as project_model
 import harness.src.main.processor.component_processor as component_processor
-from python_commons import utils
+from pythoncommons import utils
 from . import generic_processor
 
 

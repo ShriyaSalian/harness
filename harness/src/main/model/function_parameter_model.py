@@ -1,4 +1,4 @@
-from python_commons import utils
+from pythoncommons import utils
 
 
 def get_inputs(parameter):
