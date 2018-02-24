@@ -1,5 +1,5 @@
 #common properties
-project = /users/rberkheimer/projects/harness/harness
+project = /users/rberkheimer/projects/gsoc/harness/harness/harness
 properties = {project}/properties
 internal_data = {project}/data
 
