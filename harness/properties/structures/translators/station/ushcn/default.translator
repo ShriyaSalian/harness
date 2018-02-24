@@ -1,0 +1,21 @@
+#The translator for the ushcn template of the station structure.
+
+name = ushcn
+
+source_structure = Station
+source_template = default
+
+target_structure = Station
+target_template = ushcn
+
+Target.id = Source.id
+Target.longitude = Source.location.coordinate.coordinates[0]
+Target.latitude = Source.location.coordinate.coordinates[1]
+Target.elevation = Source.location.coordinate.coordinates[2]
+Target.state = Source.location.state
+Target.time_zone = Source.location.time_zone
+Target.locality = Source.location.locality
+Target.composite1 = Source.composites[0].station
+Target.composite2 = Source.composites[1].station
+Target.composite3 = Source.composites[2].station
+Target.composite4 = Source.composites[3].station

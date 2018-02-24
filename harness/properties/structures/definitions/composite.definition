@@ -1,0 +1,11 @@
+#The metadata file headers for the composite structure definition.
+
+group = ghcn
+
+name = Composite
+
+description = A composite (related or equivalent) station.
+
+templates = default
+
+template_directory = {structures}/templates/composite

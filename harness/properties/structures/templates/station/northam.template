@@ -1,0 +1,17 @@
+#The northam template of the station structure.
+
+structure = Station
+
+name = northam
+
+collection = mars_asdasasdas
+
+translators = default
+
+field_names = id,latitude,longitude,elevation
+field_types = string,decimal,decimal,decimal
+field_required = True,True,True,False
+field_defaults = None,None,None,None
+
+
+translator_directory = {structures}/translators/station/northam

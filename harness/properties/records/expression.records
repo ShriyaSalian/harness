@@ -1,0 +1,34 @@
+pha,ghcnm-prod,clean,string,make clean -C lib_src/,None,1,{component}
+pha,ghcnm-prod,clean,string,make clean -C source_expand/,None,2,{component}
+pha,ghcnm-prod,clean,string,rm -rf $(INSTALLDIR),None,3,{component}
+pha,ghcnm-prod,clean,string,rm -rf $(BUILDDIR),None,4,{component}
+pha,ghcnm-prod,clean,string,rm -rf $(OUTPUTDIR),None,5,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(BUILDDIR),None,1,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(BUILDDIR)/code/bin,None,2,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(BUILDDIR)/data,None,3,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(BUILDDIR)/runlogs,None,4,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(INSTALLDIR),$(INSTALLDIR),5,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(INSTALLPROJ),$(INSTALLPROJ),6,{component}
+pha,ghcnm-prod,prepare,string,mkdir -p $(OUTPUTDIR),$(OUTPUTDIR),7,{component}
+pha,ghcnm-prod,compile,string,make compile -C lib_src/,None,1,{component}
+pha,ghcnm-prod,compile,string,make compile -C source_expand PHAVER=$(PHAVER) NETDEF=$(NETDEF) SOURCEDIR=$(CURDIR),None,2,{component}
+pha,ghcnm-prod,build,string,make build -C lib_src ODIR=$(BUILDDIR),None,1,{component}
+pha,ghcnm-prod,build,string,make build -C source_expand ODIR=$(BUILDDIR) PHAVER=$(PHAVER) NETDEF=$(NETDEF),None,2,{component}
+pha,ghcnm-prod,install,string,cp -vr build/* $(INSTALLPROJ),None,1,{component}
+pha,ghcnm-prod,install,string,make install -C $(METADIR) PROJECT=$(PROJECT) NETDEF=$(NETDEF) SVNrev=$(SVNrev) INSTALLDIR=$(INSTALLDIR),None,2,{component}
+pha,ghcnm-prod,neighbors,string,$(INSTALLPROJ)/code/bin/ushcn_dist.$(DIST_VERSION).combo -u $(U_FLAG) -m $(DATADIR)/$(DATASET)/$(METAPATH).$(DATATYPE) -o $(OUTPUTDIR)/$(DIST_FILE),None,1,{component}
+pha,ghcnm-prod,correlations,string,$(INSTALLPROJ)/code/bin/ushcn_corr.$(CORR_VERSION).combo $(CORR_YEAR) $(PROCESS_ELEMENT) -d $(DATADIR)/$(DATASET)/$(DISTPATH).$(DATATYPE) -m $(DATADIR)/$(DATASET)/$(METAPATH).$(DATATYPE) -o $(OUTPUTDIR)/$(CORR_FILE) -C $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -N $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -u $(U_FLAG) -p $(pFLAG),None,1,{component}
+pha,ghcnm-prod,main-ghcnm,string,$(INSTALLPROJ)/code/bin/PHAv$(PHAVER).FAST.MLY.$(NETDEF) $(MAXSKY) -h -Q $(Q_FLAG) -S $(S_FLAG) -s $(sFLAG) -P $(P_FLAG) -o $(oFLAG) -d $(dFLAG) -T $(T_FLAG) -l $(lFLAG) -e $(eFLAG) -p $(pFLAG) -q $(qFLAG) -c $(cFLAG) -t $(tFLAG) -n $(DATADIR)/$(DATASET)/$(CORRPATH).$(DATATYPE) -C $(DATADIR)/$(DATASET)/$(STATIONDIR)/ $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -N $(DATADIR)/$(DATASET)/$(STATIONDIR)/ $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -O $(OUTPUTDIR),None,1,{component}
+pha,ghcnm-prod,main-ushcn,string,$(INSTALLPROJ)/code/bin/PHAv$(PHAVER).FAST.MLY.$(NETDEF) $(MAXSKY) -Q $(Q_FLAG) -S $(S_FLAG) -s $(sFLAG) -P $(P_FLAG) -o $(oFLAG) -d $(dFLAG) -T $(T_FLAG) -l $(lFLAG) -e $(eFLAG) -p $(pFLAG) -q $(qFLAG) -c $(cFLAG) -t $(tFLAG) -n $(DATADIR)/$(DATASET)/$(CORRPATH).$(DATATYPE) -C $(DATADIR)/$(DATASET)/$(STATIONDIR)/ $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -N $(DATADIR)/$(DATASET)/$(STATIONDIR)/ $(DATADIR)/$(DATASET)/$(STATIONDIR)/ -O $(OUTPUTDIR),None,1,{component}
+py_common,py_common,build,string,use the $(compiled_file) to build,$(build_file),1,{component}
+py_common,py_common,build,string,$(build_input_1) then do this $(build_input_2) with the build file $(build_file),$(build_file_result),2,{component}
+py_common,py_common,build,string,test the intermediate $(build_file_result) finally do this $(build_input_2),$(second_build_intermediate),3,{component}
+py_common,py_common,build,string,another test :-) $(second_build_intermediate) and $(build_input_file),$(build_output_file),4,{component}
+py_common,py_common,build,string,in place modification$(in_place_input) and this $(second_build_intermediate) finally do this $(build_input_3),$(in_place_input),5,{component}
+py_common,py_common,compile,string,$(compile) to compiled_file,$(compiled_file),1,{component}
+py_common,py_common,compile,string,$(compiled_file) run check,$(compiled_file_check),2,{component}
+py_common,py_common,compile,string,if $(compiled_file_check) use $(compile_input_4),$(output_4),3,{component}
+py_common,py_common,compile,string,use $(compiled_file) with $(input_5) but dont output,None,4,{component}
+py_common,py_common,compile,string,$(another_compile_input) and $(input_5),$(final_compile_output),5,{component}
+py_common,py_common,use_stations,string,use $(this) with -S $(stations) to make an awesome stations filtered output,$(stations),1,{component}
+py_common,py_common,external_test_function,string,testing an external function $(stations),$(external_output),1,{component}

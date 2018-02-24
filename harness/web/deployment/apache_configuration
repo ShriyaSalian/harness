@@ -1,0 +1,13 @@
+<VirtualHost *>
+    ServerName example.com
+
+    WSGIDaemonProcess ghcn_data user=user1 group=group1 threads=5
+    WSGIScriptAlias / /var/www/ghcn_data/ghcn_data.wsgi
+
+    <Directory /var/www/ghcn_data>
+        WSGIProcessGroup ghcn_data
+        WSGIApplicationGroup %{GLOBAL}
+        Order deny,allow
+        Allow from all
+    </Directory>
+</VirtualHost>

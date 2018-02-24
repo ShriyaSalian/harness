@@ -1,0 +1,15 @@
+#The ghcnm translator for the ghcnm template of the station structure.
+
+name = ghcnm
+
+source_structure = Station
+source_template = ghcnm
+
+target_structure = Station
+target_template = default
+
+Target.id = Source.id
+Target.location.name = Source.location_name
+Target.location.coordinate.coordinates[0] = Source.longitude
+Target.location.coordinate.coordinates[1] = Source.latitude
+Target.location.coordinate.coordinates[2] = Source.elevation

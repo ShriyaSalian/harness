@@ -1,0 +1,16 @@
+#The ushcn template of the station structure.
+
+structure = Station
+
+name = ushcn
+
+collection = mars_asadfdsafsd
+
+translators = default
+
+field_names = id,latitude,longitude,elevation,state,locality,composite1,composite2,composite3,composite4,time_zone
+field_types = string,decimal,decimal,decimal,string,string,string,string,string,string,string
+field_required = True,True,True,False,False,False,False,False,False,False,False
+field_defaults = None,None,None,None,None,None,None,None,None,None,None
+
+translator_directory = {structures}/translators/station/ushcn

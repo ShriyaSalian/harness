@@ -1,0 +1,19 @@
+<div id='controls' class='full-width panel_menu_color_theme'
+ng-show='controls.visible'>
+    <div id='program_select_div' class='inline panel_menu_color_theme'>
+        Program:
+        <select id='program_selector' ng-model="program.selection" ng-change="program.changed()"
+        ng-options="item for item in program.options"></select>
+    </div>
+    <div id='parameter_select_div' class='inline panel_menu_color_theme'>
+        Parameter:
+        <select id='parameter_selector' ng-model="parameter.selection" ng-change="parameter.changed()"
+        ng-options="item for item in parameter.options"></select>
+    </div>
+    <div id='station_select_div' class='inline panel_menu_color_theme'>
+        <button ng-click = "station_tools.get_all_stations()">All stations</button>
+        <button ng-click = "station_tools.get_random_stations()">Random stations</button>
+        <button ng-click = "station_tools.clear_stations()">Clear stations</button>
+    </div>
+
+</div>

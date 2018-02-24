@@ -1,0 +1,14 @@
+#The default template of the coordinate structure.
+
+structure = Coordinate
+
+collection = mars_lasdkghadsk
+
+name = default
+
+field_names = coordinates,type
+field_types = collection(decimal),string
+field_required = True,False
+field_defaults = None,Point
+
+translator_directory = {structures}/translators/coordinate/default

@@ -1,0 +1,11 @@
+#The metadata file headers for the station structure definition.
+
+group = ghcn
+
+name = Station
+
+description = Physical stations related to GHCN.
+
+templates = default,ghcnm,northam,ushcn
+
+template_directory = {structures}/templates/station

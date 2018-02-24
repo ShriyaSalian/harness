@@ -1,0 +1,19 @@
+#The metadata file headers for projects.
+#Projects are the top level container in the harness program.
+#This file provides headers that describe the model and associated instructions
+#on how to read and describe this model type.
+#It should provide name and fields parameters. It should be read by the
+#property reader module.
+
+records_file = {records}/project.records
+
+type_name = Project
+
+field_names = name,description,location,users,capabilities
+
+#valid values are string, decimal, float, integer
+field_types = string,string,string,string,string
+
+#field separator if start positions not specified
+#valid values include comma and tab
+field_separator=comma

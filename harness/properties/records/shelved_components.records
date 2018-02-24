@@ -1,0 +1,3 @@
+pha,ghcnm-pha-prod,Version 3 of the pairwise homogeneity algorithm,algorithm,git,git@k3.cicsnc.org:PHA/ghcnm-pha-prod.git,{project}/components
+pha,ghcnm-pha,The reengineered version of the pairwise homogeneity algorithm,algorithm,git,git@k3.cicsnc.org:PHA/ghcnm-pha.git,{project}/components
+pha,ghcn_data,The data setup project for the ghcn program,library,git,git@k3.cicsnc.org:PHA/ghcn_data.git,{project}/components

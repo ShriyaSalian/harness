@@ -1,0 +1,79 @@
+.node {
+    cursor: pointer;
+  }
+
+  .overlay{
+      background-color:#EEE;
+  }
+
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 1.5px;
+  }
+
+  .node text {
+    font-size:10px;
+    font-family:sans-serif;
+  }
+
+  .node_name {
+      font-family:sans-serif;
+      font-weight: bold;
+  }
+
+  .node_type {
+      font-size:10px;
+      font-family:sans-serif;
+  }
+
+
+clone {
+}
+
+
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: green;
+    stroke-width: 3px;
+  }
+
+  .move_circle.show{
+      display:block;
+  }
+
+  .move_circle, .activeDrag .move_circle{
+       display: none;
+  }
+
+
+  .clone_circle.show{
+      display:block;
+  }
+
+  .clone_circle, .activeDrag .clone_circle{
+       display: none;
+  }
+
+
+  .svg-container {
+      display: inline-block;
+      position: relative;
+      width: 100%;
+      padding-bottom: 100%;
+      vertical-align: top;
+      overflow: hidden;
+  }
+  .svg-content-responsive {
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 0;
+  }

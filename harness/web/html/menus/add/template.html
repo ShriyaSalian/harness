@@ -1,0 +1,36 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header">
+        <button type="button" class="close" ng-click="$hide()">&times;</button>
+        <h4 class="aside-title">Template Creator</h4>
+      </div>
+      <div class="aside-body">
+          <div>
+              <label>Template Name:&nbsp;</label>
+              <input ng-model="menu_node.template_name">
+              <br><br>
+          </div>
+          <div>
+              <label>Template Description:&nbsp;</label>
+              <textarea ng-model="menu_node.template_description"></textarea>
+          </div>
+          <hr>
+          <div>
+              <label>Template Order:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.order"
+                      ng-change="asides.template.change_template_order()"
+                      data-html="1" data-toggle="true"
+                      bs-options="type for type in menu_node.orders" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+          </div>
+      </div>
+      <div class="aside-footer">
+        <button type="button" class="btn btn-default" ng-click="asides.template.save('add', $hide)">Save</button>
+        <button type="button" class="btn btn-default" ng-click="asides.template.cancel($hide)">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

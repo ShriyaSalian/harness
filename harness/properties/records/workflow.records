@@ -1,0 +1,8 @@
+py_common,get_coordinate,stores a single coordinate.,None,None
+py_common,get_coordinate_multiple,Tests adding the same function to a workflow twice.,None,None
+py_common,test_unchained,Tests adding three unchained functions to a workflow,None,None
+py_common,test_chained,Tests chaining functions in a workflow.,None,None
+py_common,test_last_evaluation,Tests using the most recent evaluation for a workflow as an input to a workflow function.,None,None
+py_common,test_named_evaluation,Tests using a named evaluation as the input to a workflow function.,None,None
+py_common,multiple_component_test,Tests combining functions from different components.,None,None
+py_common,pha_station_maker,Creates pha stations for use in pha testing.,None,None

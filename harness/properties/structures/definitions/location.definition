@@ -1,0 +1,11 @@
+#The metadata file headers for the location structure definition.
+
+group = ghcn
+
+name = Location
+
+description = A geographic location and associated metadata.
+
+templates = default
+
+template_directory = {structures}/templates/location

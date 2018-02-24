@@ -1,0 +1,14 @@
+#The default template of the location structure.
+
+structure = Location
+
+collection = mars_abasdgsg
+
+name = default
+
+field_names = coordinate,projection,datum,name,state,time_zone
+field_types = Coordinate.default,string,string,string,string,string
+field_required = True,False,False,False,False,False
+field_defaults = None,None,WGS84,None,None,None
+
+translator_directory = {structures}/translators/location/default

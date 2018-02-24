@@ -1,0 +1,14 @@
+#The default template for the Program structure.
+
+structure = Program
+
+name = default
+
+collection = mars_sdfgsdfgsd
+
+field_names = name,description,parameters
+field_types = string,string,collection(Parameter.default)
+field_required = True,True,False
+field_defaults = None,None,None
+
+translator_directory = {structures}/translators/program/default

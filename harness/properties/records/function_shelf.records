@@ -1,0 +1,26 @@
+#field_names = project,component,name,description,type,parameters
+#pha,ghcnm-prod,clean,external
+#pha,ghcnm-prod,prepare,external
+#pha,ghcnm-prod,compile,external
+#pha,ghcnm-prod,build,external
+#pha,ghcnm-prod,install,external
+#pha,ghcnm-prod,neighbors,external
+#pha,ghcnm-prod,correlations,external
+#pha,ghcnm-prod,main-ghcnm,external
+#pha,ghcnm-prod,main-ushcn,external
+#py_common,py_common,compile,external
+#py_common,py_common,build,external
+#py_common,py_common,make_stations,internal
+#py_common,py_common,use_stations,external
+#py_common,py_common,run_full,compound
+#py_common,py_common,test_nested_compound,compound
+#py_common,py_common,internal_test_function,internal
+#py_common,py_common,external_test_function,external
+#py_common,py_common,empty_external_test_function,external
+#py_common,py_common,bad_nested_compound1,compound
+#py_common,py_common,bad_nested_compound2,compound
+#py_common,py_common,empty_nested_compound,compound
+#py_common,py_common,double_nested_compound,compound
+#py_common,py_common,single_nested_compound,compound
+#py_common,py_common,test_internal_function,compound
+py_common,py_common,internal_test_function, a function to test loading stations into the project,internal,None

@@ -1,0 +1,14 @@
+#The northam translator for the default template of the station structure.
+
+name = northam
+
+source_structure = Station
+source_template = northam
+
+target_structure = Station
+target_template = default
+
+Target.id = Source.id
+Target.location.coordinate.coordinates[0] = Source.longitude
+Target.location.coordinate.coordinates[1] = Source.latitude
+Target.location.coordinate.coordinates[2] = Source.elevation

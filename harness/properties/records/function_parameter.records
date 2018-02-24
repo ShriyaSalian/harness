@@ -1,0 +1,13 @@
+py_common,py_common,get_random_coordinate,coordinate,A latitude/longitude coordinate pair.,output,0
+py_common,py_common,get_random_integer,lower_bound,A lower bound for an integer.,input,0
+py_common,py_common,get_random_integer,upper_bound,An upper bound for an integer.,input,1
+py_common,py_common,get_random_integer,random_integer,A random integer,output,0
+py_common,py_common,get_month_by_index,month_index,A numerical index corresponding to a month.,input,0
+py_common,py_common,get_month_by_index,month,The name of a month.,output,0
+py_common,ghcn_data,load_all_stations,profile,The system profile to load stations from.,input,0
+py_common,ghcn_data,load_all_stations,stations,All stations loaded from a filesystem.,output,0
+py_common,ghcn_data,make_station_file,stations,Input stations to make a file of.,input,0
+py_common,ghcn_data,make_station_file,station_file,A created station file.,output,0
+py_common,ghcn_data,get_random_stations,program,A program to use for getting stations.,input,0
+py_common,ghcn_data,get_random_stations,num_stations,The number of stations to return,input,1
+py_common,ghcn_data,get_random_stations,stations,The random stations that were produced.,output,0

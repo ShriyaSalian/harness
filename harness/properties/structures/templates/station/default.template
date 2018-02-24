@@ -1,0 +1,20 @@
+#The default template for the Station structure.
+
+structure = Station
+
+name = default
+
+translators = ghcnm,northam,ushcn
+
+collection = mars_asdbasdfasd
+
+index_fields = location.coordinate
+index_types = 2dsphere
+
+field_names = id,location,composites,programs
+field_types = string,Location.default,collection(Composite.default),collection(Program.default)
+field_required = True,True,False,False
+field_defaults = None,None,None,None
+
+
+translator_directory = {structures}/translators/station/default

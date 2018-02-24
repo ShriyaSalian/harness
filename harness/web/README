@@ -1,0 +1,6 @@
+This is the top level web directory where the front end code lives.
+
+This directory includes a simple server to host static resources used during
+development on port 8000.
+To start the simple server, change to the directory where simple_server.py
+lives and then in the command line type 'python simple_server.py'

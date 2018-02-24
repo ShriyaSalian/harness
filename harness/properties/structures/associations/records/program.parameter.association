@@ -1,0 +1,3 @@
+ghcnm = tmax,tmin,tavg
+ushcn = tmax,tmin
+northam = tmax,tmin

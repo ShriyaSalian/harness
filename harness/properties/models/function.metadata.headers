@@ -1,0 +1,18 @@
+#The metadata file headers for functions.
+#This file provides headers that describe the model and associated instructions
+#on how to read and describe this model type.
+#It should provide name and fields parameters. It should be read by the
+#property reader module.
+
+records_file = {records}/function.records
+
+type_name = Function
+
+field_names = project,component,name,description,type,parameters
+
+#valid values are string, decimal, float, integer
+field_types = string,string,string,string,string,string
+
+#field separator if start positions not specified
+#valid values include comma and tab
+field_separator=comma

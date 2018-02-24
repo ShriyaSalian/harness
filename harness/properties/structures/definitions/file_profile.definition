@@ -1,0 +1,11 @@
+#The metadata file headers for the record reader profiles structure definition.
+
+group = ghcn
+
+name = File Profile
+
+description = Storage profiles that describe how files store records.
+
+templates = single_line,multi_line
+
+template_directory = {structures}/templates/file_profile

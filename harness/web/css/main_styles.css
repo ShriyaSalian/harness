@@ -1,0 +1,37 @@
+/*
+We orginially placed this for our elements to size correctly on resize.
+We've fixed this issue by resizing md-active class, div[md-scope] attribute,
+and adding a .full-stretch to the other elements.
+(incorrectly sizing dropdowns)
+.ng-scope {
+    height: 100%;
+}
+
+*/
+
+.md-active {
+    height: 100%;
+}
+
+div[md-scope] {
+    height: 100%;
+}
+
+.full-stretch {
+    height: 100%;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.panel_menu_color_theme {
+    background-color: #4863A0;
+    color: #EBF4FA
+}
+
+html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+  }

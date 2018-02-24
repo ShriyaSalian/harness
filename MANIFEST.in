@@ -1,0 +1,3 @@
+recursive-include harness/properties *
+recursive-include harness/web *
+recursive-include harness/drivers *

@@ -1,0 +1,11 @@
+#The metadata file headers for the parameter structure definition.
+
+group = ghcn
+
+name = Parameter
+
+description = Physical parameter measurements.
+
+templates = default
+
+template_directory = {structures}/templates/parameter

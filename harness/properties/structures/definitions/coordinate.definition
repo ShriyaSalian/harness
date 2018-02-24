@@ -1,0 +1,11 @@
+#The metadata file headers for the coordinate structure definition.
+
+group = ghcn
+
+name = Coordinate
+
+description = A spatial coordinate
+
+templates = default
+
+template_directory = {structures}/templates/coordinate

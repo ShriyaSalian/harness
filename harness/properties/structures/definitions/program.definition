@@ -1,0 +1,11 @@
+#The metadata file headers for the program structure definition.
+
+group = ghcn
+
+name = Program
+
+description = Data programs that fall under the umbrella of the Global Historical Climatology Network.
+
+templates = default
+
+template_directory = {structures}/templates/program

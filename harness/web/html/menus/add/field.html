@@ -1,0 +1,97 @@
+<div class="aside" tabindex="-1" role="dialog">
+  <div class="aside-dialog">
+    <div class="aside-content">
+      <div class="aside-header">
+        <button type="button" class="close" ng-click="asides.field.cancel($hide)">&times;</button>
+        <h4 class="aside-title">Field Creator</h4>
+      </div>
+      <div class="aside-body">
+          <div>
+              <label>Field Name:&nbsp;</label>
+              <input ng-model="menu_node.field_name">
+              <br>
+          </div>
+          <hr>
+          <div>
+              <label>Type Class:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.type_class"
+                      ng-change="asides.field.change_type_class('add')"
+                      data-html="1" data-toggle="true"
+                      bs-options="type for type in fields.types" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+              <br><br>
+              <div ng-show="menu_node.type_class=='fundamental'">
+              <label>Type Name:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.type_base"
+                      ng-change="asides.field.change_type_name()"
+                      data-html="1" data-toggle="true"
+                      bs-options="type for type in fields.fundamental_types" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+              </div>
+              <div ng-show="menu_node.type_class=='custom'">
+              <label>Type Structure:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.type_structure"
+                      ng-change="asides.field.change_type_structure()"
+                      data-html="1" data-toggle="true"
+                      bs-options="type.name as type.name for type in menu_node.type_structures" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+              <br><br>
+              <label>Type Template:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.type_template"
+                      ng-change="asides.field.change_type_template()"
+                      data-html="1" data-toggle="true"
+                      bs-options="type for type in menu_node.type_templates" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+              </div>
+              <br>
+              <label>Type Count:&nbsp;</label>
+              <button id='field_inspector_field_type_count'
+                      type="button" class="btn btn-default"
+                      ng-model="menu_node.type_collection"
+                      ng-change="asides.field.change_type_count()"
+                      elem-ready="asides.field.change_type_count()"
+                      bs-checkbox>Collection</button>
+          </div>
+          <hr>
+          <div>
+              <label>Field Required:</label>
+              <button id='field_inspector_field_required'
+                      type="button" class="btn btn-default"
+                      ng-model="menu_node.field_required"
+                      ng-change="asides.field.change_field_required()"
+                      elem-ready="asides.field.change_field_required()"
+                      bs-checkbox>False</button>
+          </div>
+          <div ng-show="menu_node.type_class=='fundamental'">
+          <hr>
+              <label>Default Value:&nbsp;</label>
+              <input ng-model="menu_node.field_default">
+          </div>
+          <hr>
+          <div>
+              <label>Field Order:&nbsp;</label>
+              <button type="button" class="btn btn-default"
+                      ng-model="menu_node.order"
+                      ng-change="asides.field.change_order()"
+                      data-html="1" data-toggle="true"
+                      bs-options="type for type in menu_node.orders" bs-select>
+                    Action <span class="caret"></span>
+              </button>
+
+          </div>
+      </div>
+      <div class="aside-footer">
+        <button type="button" class="btn btn-default" ng-click="asides.field.save('add', $hide)">Save</button>
+        <button type="button" class="btn btn-default" ng-click="asides.field.cancel($hide)">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

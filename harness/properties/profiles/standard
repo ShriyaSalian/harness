@@ -1,0 +1,14 @@
+#common properties
+properties = {project}/properties
+internal_data = {project}/data
+
+#harness properties
+profiles = {properties}/profiles
+records = {properties}/records
+
+#parameter properties
+structures = {properties}/structures
+
+#web properties
+template = {project}/web/html
+static = {project}/web

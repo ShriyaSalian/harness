@@ -1,0 +1,15 @@
+#common properties
+project = /users/rberkheimer/projects/harness/harness
+properties = {project}/properties
+internal_data = {project}/data
+
+#project properties
+profiles = {properties}/profiles
+records = {properties}/records
+
+#parameter properties
+structures = {properties}/structures
+
+#web properties
+template = {project}/web/html
+static = {project}/web

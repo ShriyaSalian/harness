@@ -1,0 +1,17 @@
+py_common,py_common,run_full,compile,1
+py_common,py_common,run_full,build,2
+py_common,py_common,run_full,make_stations,3
+py_common,py_common,run_full,use_stations,4
+py_common,py_common,test_nested_compound,run_full,1
+py_common,py_common,test_nested_compound,empty_external_test_function,2
+py_common,py_common,test_nested_compound,internal_test_function,3
+py_common,py_common,test_nested_compound,external_test_function,4
+py_common,py_common,test_nested_compound,use_stations,5
+py_common,py_common,bad_nested_compound1,run_full,1
+py_common,py_common,bad_nested_compound1,test_nested_compound,2
+py_common,py_common,bad_nested_compound1,internal_test_function,3
+py_common,py_common,bad_nested_compound1,bad_nested_compound2,4
+py_common,py_common,bad_nested_compound1,run_full,5
+py_common,py_common,bad_nested_compound2,bad_nested_compound2,1
+py_common,py_common,double_nested_compound,single_nested_compound,1
+py_common,py_common,single_nested_compound,test_nested_compound,1

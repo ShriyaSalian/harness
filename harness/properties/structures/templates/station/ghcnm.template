@@ -1,0 +1,16 @@
+#The ghcnm template of the station structure.
+
+structure = Station
+
+name = ghcnm
+
+translators = default
+
+collection = mars_asdbasdasdgasd
+
+field_names = id,latitude,longitude,elevation,location_name
+field_types = string,decimal,decimal,decimal,string
+field_required = True,True,True,False,False
+field_defaults = None,None,None,None,None
+
+translator_directory = {structures}/translators/station/ghcnm

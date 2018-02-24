@@ -1,0 +1,18 @@
+#The metadata file headers for internal functions.
+#This file provides headers that describe the model and associated instructions
+#on how to read and describe this model type.
+#It should provide name and fields parameters. It should be read by the
+#property reader module.
+
+records_file = {records}/internal_function.records
+
+type_name = InternalFunction
+
+field_names = project,component,name,description,scope,function,type,language,language_version,location,parameters
+
+#valid values are string, decimal, float, integer
+field_types = string,string,string,string,string,string,string,string,string,string,string
+
+#field separator if start positions not specified
+#valid values include comma and tab
+field_separator=comma

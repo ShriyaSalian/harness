@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>harness</title>
+    <!-- external styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bower_components/angular-material/angular-material.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bower_components/angular-motion/dist/angular-motion.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
+
+
+    <!-- Helper Libraries -->
+    <script src="{{ url_for('static', filename='bower_components/lodash/dist/lodash.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/utility_library.js') }}"></script>
+    <!-- Angular Libraries -->
+    <script src="{{ url_for('static', filename='bower_components/angular/angular.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-animate/angular-animate.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-sanitize/angular-sanitize.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-route/angular-route.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-aria/angular-aria.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-messages/angular-messages.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='external_resources/svg-assets-cache.js') }}"></script>
+    <!-- D3 (using v3 of this library until we can update changed functionality of v4)-->
+    <script src="{{ url_for('static', filename='external_resources/d3_v3.min.js') }}"></script>
+    <!-- Map related -->
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.15.1/css/ol.css" type="text/css">
+    <script src="http://openlayers.org/en/v3.15.1/build/ol.js" type="text/javascript"></script>
+    <script src="http://openlayers.org/api/OpenLayers.js"></script>
+    <!-- Jquery -->
+    <!--script src="http://code.jquery.com/jquery-1.10.2.min.js"></script-->
+    <!--script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script-->
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Angular-strap (Bootstrap) -->
+    <script src="{{ url_for('static', filename='bower_components/angular-strap/dist/angular-strap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-strap/dist/angular-strap.tpl.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/angular-strap/dist/modules/navbar.min.js') }}"></script>
+    <!-- Angular Material -->
+    <script src="{{ url_for('static', filename='bower_components/angular-material/angular-material.min.js') }}"></script>
+    <!-- Project Libraries -->
+        <!--Style Libraries -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/main_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/tab_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/map_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/info_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/structure_styles.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap-additions.min.css') }}" />
+        <!--Angular Libraries-->
+    <script src="{{ url_for('static', filename='javascript/app.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/config.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/directives.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/factories.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/services.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/controllers.js') }}"></script>
+        <!--Processing Libraries-->
+    <script src="{{ url_for('static', filename='javascript/map_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/station_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/tree_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/structure_library.js') }}"></script>
+    <!--script src="{{ url_for('static', filename='javascript/project_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/component_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/workflow_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/function_library.js') }}"></script>
+    <script src="{{ url_for('static', filename='javascript/evaluation_library.js') }}"></script-->
+  </head>
+  <body id='body' ng-app='GhcnApp' ng-controller='viewController' ng-cloak>
+      <div ng-cloak>
+        <md-content>
+          <md-tabs md-dynamic-height>
+            <md-tab label="Projects" md-on-select="tabSelected('project')">
+                <md-content class="md-padding">
+                    <div id='project-tab'  ng-include src="'{{ url_for('static', filename='html/tabs/project.html') }}'"></div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Components" md-on-select="tabSelected('components')">
+                <md-content class="md-padding">
+                    <div id='component-tab'  ng-include src="'{{ url_for('static', filename='html/tabs/component.html') }}'"></div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Structures" md-on-select="tabSelected('structures')">
+              <md-content class='full-stretch'>
+                  <div id='structures-tab' ng-include src="'{{ url_for('static', filename='html/tabs/structure.html') }}'"></div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Functions" md-on-select="tabSelected('functions')">
+              <md-content>
+                  <div id='functions-tab' ng-include src="'{{ url_for('static', filename='html/tabs/function.html') }}'"></div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Workflows" md-on-select="tabSelected('workflows')">
+                <md-content class="md-padding">
+                    <div id='workflows-tab'  ng-include src="'{{ url_for('static', filename='html/tabs/workflow.html') }}'"></div>
+                </md-content>
+            </md-tab>
+            <md-tab label="Evaluations" md-on-select="tabSelected('evaluations')">
+              <md-content class="md-padding">
+                  <div id='evaluations-tab' ng-include src="'{{ url_for('static', filename='html/tabs/evaluation.html') }}'"></div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Graph" md-on-select="tabSelected('graph')">
+              <md-content class="md-padding">
+                  <div id='graph-tab' ng-include src="'{{ url_for('static', filename='html/tabs/graph.html') }}'"></div>
+              </md-content>
+            </md-tab>
+            <md-tab label="Map" md-on-select="tabSelected('map')">
+              <md-content>
+                  <div id='map-tab' ng-include src="'{{ url_for('static', filename='html/tabs/map.html') }}'"></div>
+              </md-content>
+            </md-tab>
+          </md-tabs>
+        </md-content>
+      </div>
+  </body>
+</html>

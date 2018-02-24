@@ -1,0 +1,16 @@
+py_common,get_coordinate,get_random_coordinate,0
+py_common,get_coordinate_multiple,get_random_coordinate,0
+py_common,get_coordinate_multiple,get_random_coordinate,1
+py_common,test_unchained,get_random_coordinate,0
+py_common,test_unchained,get_random_integer,1
+py_common,test_unchained,get_month_by_index,2
+py_common,test_chained,get_random_integer,0
+py_common,test_chained,get_month_by_index,1
+py_common,multiple_component_test,load_all_stations,0
+py_common,multiple_component_test,get_month_by_index,1
+py_common,multiple_component_test,get_random_integer,2
+py_common,pha_station_maker,load_all_stations,0
+py_common,pha_station_maker,get_random_stations,1
+py_common,pha_station_maker,make_station_file,2
+py_common,test_last_evaluation,get_month_by_index,0
+py_common,test_named_evaluation,get_month_by_index,0

@@ -1,0 +1,19 @@
+#The metadata file headers for expressions.
+#This file provides headers that describe the model and associated instructions
+#on how to read and describe this model type.
+#It should provide name and fields parameters. It should be read by the
+#property reader module.
+#Location indicates the location of the statement relative to the default project directory
+
+records_file = {records}/expression.records
+
+type_name = Expression
+
+field_names = project,component,function,type,statement,output,order,location
+
+#valid values are string, decimal, float, integer
+field_types = string,string,string,string,string,string,integer,string
+
+#field separator if start positions not specified
+#valid values include comma and tab
+field_separator=comma
