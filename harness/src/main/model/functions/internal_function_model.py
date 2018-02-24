@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def named_tuple_to_function_closure(add_date):
@@ -31,7 +31,7 @@ def named_tuple_to_function_closure(add_date):
 
     def remove_identifiers(function):
         identifiers = ['project']
-        utils.remove_dictionary_keys(function, identifiers)
+        general_utils.remove_dictionary_keys(function, identifiers)
 
     return named_tuple_to_function
 

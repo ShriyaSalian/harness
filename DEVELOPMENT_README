@@ -39,15 +39,11 @@ Check out the following projects like so
 (you can copy and paste these three commands)*:
 
 
-git clone https://QuantumOrigin@bitbucket.org/QuantumOrigin/pythoncommons.git
+git clone https://github.com/RBerkheimer/pythoncommons.git
 
-git clone https://QuantumOrigin@bitbucket.org/QuantumOrigin/mars.git
+git clone https://github.com/RBerkheimer/mars.git
 
-git clone https://QuantumOrigin@bitbucket.org/QuantumOrigin/harness.git
-
-
-*Note: you must have access to the development bitbucket. If you have issue,
-contact Ryan Berkheimer for access (rab25@case.edu).
+git clone https://github.com/RBerkheimer/harness.git
 
 
 ------------------------------------------------------------------------
@@ -87,7 +83,8 @@ flask
 simplejson
 geojson
 
-These should be automatically installed via installation.
+These should be automatically installed via installation (they are added to build deps).
+If, however, they aren't and/or cannot be found (like if you use conda), you'll have to install them yourself.
 ---------------------------------------------------------------------------
 
 6. Starting the project server

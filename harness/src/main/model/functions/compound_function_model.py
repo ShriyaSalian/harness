@@ -1,4 +1,4 @@
-from pythoncommons import utils
+from pythoncommons import general_utils
 
 
 def named_tuple_to_compound_function_closure(add_date):
@@ -22,7 +22,7 @@ def named_tuple_to_compound_function_closure(add_date):
 
 def remove_subfunction_identifiers(subfunction):
     subfunction_identifiers = ['project', 'function']
-    utils.remove_dictionary_keys(subfunction, subfunction_identifiers)
+    general_utils.remove_dictionary_keys(subfunction, subfunction_identifiers)
     return subfunction
 
 
@@ -66,7 +66,7 @@ def remove_component(function):
     or compound_function.
     """
     remove_keys = ['component']
-    utils.remove_dictionary_keys(function, remove_keys)
+    general_utils.remove_dictionary_keys(function, remove_keys)
     return function
 
 if __name__ == '__main__':

@@ -4,7 +4,6 @@ setup(
     packages=find_packages(),
     install_requires=[
           'flask',
-          'json',
           'bson',
           'pythoncommons',
           'mars'
@@ -18,7 +17,7 @@ setup(
     classifiers=[
         "Programming Language :: Python",
         "Intended Audience :: Developers",
-        "License :: OSI Approved :: GNU Library or Lesser General Public License (LGPL)",
+        "License :: MIT Standard",
         "Operating System :: OS Independent",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Text Processing :: Linguistic"])
