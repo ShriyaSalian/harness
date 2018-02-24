@@ -2,7 +2,7 @@ import sys
 import imp
 import time
 from collections import OrderedDict
-from pythoncommons import db_utils
+from pythoncommons import mongo_utils
 from bson.objectid import ObjectId
 
 
@@ -11,10 +11,10 @@ def get_function_by_id(project, function_id):
     """
     function_id = ObjectId(function_id)
     collection = get_language_collection(project)
-    argument = db_utils.make_single_field_argument('_id', function_id)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('_id', function_id)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    function_list = db_utils.unload_cursor(cursor)
+    function_list = mongo_utils.unload_cursor(cursor)
     try:
         return function_list[0]
     except IndexError:
@@ -30,7 +30,7 @@ def update_function(project, function, changes):
         function_id = function['_id']
     else:
         function_id = function
-    argument = db_utils.make_single_field_argument('_id', function_id)
+    argument = mongo_utils.make_single_field_argument('_id', function_id)
     updates = []
     for change in changes:
         if '.' in change:
@@ -38,11 +38,11 @@ def update_function(project, function, changes):
             nested_value_string = 'workflow'
             for nested_change in nested_changes:
                 nested_value_string += '["'"{0}"'"]'.format(nested_change)
-            updates.append(db_utils.make_update_argument(change, eval(nested_value_string)))
+            updates.append(mongo_utils.make_update_argument(change, eval(nested_value_string)))
         else:
-            updates.append(db_utils.make_update_argument(change, function[change]))
-    update = db_utils.merge_update_args(updates)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+            updates.append(mongo_utils.make_update_argument(change, function[change]))
+    update = mongo_utils.merge_update_args(updates)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     if cursor.matched_count == 1:
         return get_function_by_id(project, function_id)
     return None
@@ -52,8 +52,8 @@ def get_language_collection(project):
     """Connects to the specified project and returns a pointer
     to the functions collection.
     """
-    connection = db_utils.mongo_get_connection(project)
-    collection = db_utils.mongo_get_collection(connection, 'language')
+    connection = mongo_utils.mongo_get_connection(project)
+    collection = mongo_utils.mongo_get_collection(connection, 'language')
     return collection
 
 

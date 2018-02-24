@@ -3,10 +3,7 @@ setup(
     name='harness',
     packages=find_packages(),
     install_requires=[
-          'pymongo',
           'flask',
-          'simplejson',
-          'geojson',
           'pythoncommons',
           'mars'
       ],

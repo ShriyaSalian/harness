@@ -1,12 +1,12 @@
-from pythoncommons import db_utils, utils
+from pythoncommons import mongo_utils, utils
 
 
 def get_component_collection(database):
     """Connects to the specified database and returns a pointer
     to the components collection.
     """
-    connection = db_utils.mongo_get_connection(database)
-    collection = db_utils.mongo_get_collection(connection, 'components')
+    connection = mongo_utils.mongo_get_connection(database)
+    collection = mongo_utils.mongo_get_collection(connection, 'components')
     return collection
 
 
@@ -18,12 +18,12 @@ def create_component_collection(database, components=None):
     status = False
     if components:
         if type(components) is dict:
-            status = db_utils.mongo_insert_one(collection, components)
+            status = mongo_utils.mongo_insert_one(collection, components)
         else:
             if len(components) == 1:
-                status = db_utils.mongo_insert_one(collection, components[0])
+                status = mongo_utils.mongo_insert_one(collection, components[0])
             else:
-                status = db_utils.mongo_insert_many(collection, components)
+                status = mongo_utils.mongo_insert_many(collection, components)
     return status
 
 
@@ -32,7 +32,7 @@ def add_component(database, component):
     component object.
     """
     collection = get_component_collection(database)
-    result = db_utils.mongo_insert_one(collection, component)
+    result = mongo_utils.mongo_insert_one(collection, component)
     result_id = result.inserted_id
     return get_component_by_id(database, result_id)
 
@@ -42,7 +42,7 @@ def remove_component_collection(database):
     Caveat emptor.
     """
     collection = get_component_collection(database)
-    status = db_utils.mongo_remove_collection(collection)
+    status = mongo_utils.mongo_remove_collection(collection)
     return status
 
 
@@ -51,10 +51,10 @@ def get_all_current_components(database):
     database.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('remove_date', None)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('remove_date', None)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_all_components(database, current_only=False):
@@ -63,8 +63,8 @@ def get_all_components(database, current_only=False):
     for each component.
     """
     collection = get_component_collection(database)
-    cursor = db_utils.mongo_find_records(collection, named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    cursor = mongo_utils.mongo_find_records(collection, named_tuple=False)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_enabled_components(database, current_only=True):
@@ -74,12 +74,12 @@ def get_enabled_components(database, current_only=True):
     collection = get_component_collection(database)
     arguments = []
     if current_only:
-        arguments.append(db_utils.make_single_field_argument('remove_date', None))
-    arguments.append(db_utils.make_single_field_argument('status', 'enabled'))
+        arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('status', 'enabled'))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     return component_list
 
 
@@ -90,12 +90,12 @@ def get_disabled_components(database, current_only=True):
     collection = get_component_collection(database)
     arguments = []
     if current_only:
-        arguments.append(db_utils.make_single_field_argument('remove_date', None))
-    arguments.append(db_utils.make_single_field_argument('status', 'disabled'))
+        arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('status', 'disabled'))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     return component_list
 
 
@@ -107,12 +107,12 @@ def get_vcs_enabled_components(database, current_only=True):
     collection = get_component_collection(database)
     arguments = []
     if current_only:
-        arguments.append(db_utils.make_single_field_argument('remove_date', None))
-    arguments.append(db_utils.make_single_field_argument('vcs.status', 'enabled'))
+        arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('vcs.status', 'enabled'))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     return component_list
 
 
@@ -124,12 +124,12 @@ def get_vcs_disabled_components(database, current_only=True):
     collection = get_component_collection(database)
     arguments = []
     if current_only:
-        arguments.append(db_utils.make_single_field_argument('remove_date', None))
-    arguments.append(db_utils.make_single_field_argument('vcs.status', 'disabled'))
+        arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('vcs.status', 'disabled'))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     return component_list
 
 
@@ -138,20 +138,20 @@ def get_removed_components(database):
     Optionally can return all records (including older) if current_only is set to False.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('status', 'removed')
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('status', 'removed')
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_component_by_id(database, component_id):
     """Returns the component by the given id.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     try:
         return component_list[0]
     except IndexError:
@@ -162,10 +162,10 @@ def get_components_by_name(database, name):
     """ Returns all the components by name, if it exists, otherwise returns False
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('name', name)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('name', name)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_current_component_by_name(database, name):
@@ -173,12 +173,12 @@ def get_current_component_by_name(database, name):
     """
     collection = get_component_collection(database)
     arguments = []
-    arguments.append(db_utils.make_single_field_argument('name', name))
-    arguments.append(db_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('name', name))
+    arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    component_list = db_utils.unload_cursor(cursor)
+    component_list = mongo_utils.unload_cursor(cursor)
     try:
         return component_list[0]
     except IndexError:
@@ -189,12 +189,12 @@ def replace_component_by_id(database, component_id, component):
     """Replaces the current component with the new component. Returns the new component.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    cursor = db_utils.mongo_replace_one(collection, component, argument)
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    cursor = mongo_utils.mongo_replace_one(collection, component, argument)
     if cursor.matched_count == 1:
-        cursor = db_utils.mongo_find_records(collection, argument=argument,
+        cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                              named_tuple=False)
-        component_list = db_utils.unload_cursor(cursor)
+        component_list = mongo_utils.unload_cursor(cursor)
         try:
             return component_list[0]
         except IndexError:
@@ -205,9 +205,9 @@ def update_component_status_by_id(database, component_id, status):
     """Updates the status of the component with the given id to the given status.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    update = db_utils.make_update_argument('status', status)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    update = mongo_utils.make_update_argument('status', status)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     return cursor
 
 
@@ -215,9 +215,9 @@ def update_component_functions_by_id(database, component_id, functions):
     """Updates the status of the component with the given id to the given status.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    update = db_utils.make_update_argument('functions', functions)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    update = mongo_utils.make_update_argument('functions', functions)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     updated_component = None
     if cursor.modified_count == 1:
         updated_component = get_component_by_id(database, component_id)
@@ -230,9 +230,9 @@ def remove_component_by_id(database, component_id, timestamp):
     """
     update_component_status_by_id(database, component_id, 'removed')
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    update = db_utils.make_update_argument('remove_date', timestamp)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    update = mongo_utils.make_update_argument('remove_date', timestamp)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     return cursor
 
 
@@ -240,9 +240,9 @@ def update_component_vcs_status_by_id(database, component_id, status):
     """Updates the vcs status of the given component with the specified status.
     """
     collection = get_component_collection(database)
-    argument = db_utils.make_single_field_argument('_id', component_id)
-    update = db_utils.make_update_argument('vcs.status', status)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', component_id)
+    update = mongo_utils.make_update_argument('vcs.status', status)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     return cursor
 
 

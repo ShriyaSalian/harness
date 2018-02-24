@@ -1,12 +1,12 @@
-from pythoncommons import db_utils, utils
+from pythoncommons import mongo_utils, utils
 
 
 def get_evaluation_collection(project):
     """Connects to the specified project and returns a pointer
     to the evaluations collection.
     """
-    connection = db_utils.mongo_get_connection(project)
-    collection = db_utils.mongo_get_collection(connection, 'evaluations')
+    connection = mongo_utils.mongo_get_connection(project)
+    collection = mongo_utils.mongo_get_collection(connection, 'evaluations')
     return collection
 
 
@@ -19,12 +19,12 @@ def create_evaluation_collection(project, evaluations=None):
     status = False
     if evaluations:
         if type(evaluations) is dict:
-            status = db_utils.mongo_insert_one(collection, evaluations)
+            status = mongo_utils.mongo_insert_one(collection, evaluations)
         else:
             if len(evaluations) == 1:
-                status = db_utils.mongo_insert_one(collection, evaluations[0])
+                status = mongo_utils.mongo_insert_one(collection, evaluations[0])
             else:
-                status = db_utils.mongo_insert_many(collection, evaluations)
+                status = mongo_utils.mongo_insert_many(collection, evaluations)
     return status
 
 
@@ -33,7 +33,7 @@ def add_evaluations(project, evaluations):
     evaluation object.
     """
     collection = get_evaluation_collection(project)
-    results = db_utils.mongo_insert_many(collection, evaluations)
+    results = mongo_utils.mongo_insert_many(collection, evaluations)
     return results
 
 
@@ -42,7 +42,7 @@ def add_evaluation(project, evaluation):
     evaluation object.
     """
     collection = get_evaluation_collection(project)
-    result = db_utils.mongo_insert_one(collection, evaluation)
+    result = mongo_utils.mongo_insert_one(collection, evaluation)
     return get_evaluation_by_id(project, result)
 
 
@@ -51,7 +51,7 @@ def remove_evaluation_collection(project):
     Caveat emptor.
     """
     collection = get_evaluation_collection(project)
-    status = db_utils.mongo_remove_collection(collection)
+    status = mongo_utils.mongo_remove_collection(collection)
     return status
 
 
@@ -60,10 +60,10 @@ def get_all_current_evaluations(project):
     project.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('remove_date', None)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('remove_date', None)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_all_evaluations(project, current_only=False):
@@ -72,8 +72,8 @@ def get_all_evaluations(project, current_only=False):
     for each evaluation.
     """
     collection = get_evaluation_collection(project)
-    cursor = db_utils.mongo_find_records(collection, named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    cursor = mongo_utils.mongo_find_records(collection, named_tuple=False)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_removed_evaluations(project):
@@ -81,20 +81,20 @@ def get_removed_evaluations(project):
     Optionally can return all records (including older) if current_only is set to False.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('status', 'removed')
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('status', 'removed')
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_evaluation_by_id(project, evaluation_id):
     """Returns the evaluation by the given id.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('_id', evaluation_id)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('_id', evaluation_id)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    evaluation_list = db_utils.unload_cursor(cursor)
+    evaluation_list = mongo_utils.unload_cursor(cursor)
     try:
         return evaluation_list[0]
     except IndexError:
@@ -105,10 +105,10 @@ def get_evaluations_by_workflow(project, workflow):
     """Returns all evaluations for the given workflow.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('workflow', workflow)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('workflow', workflow)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    evaluation_list = db_utils.unload_cursor(cursor)
+    evaluation_list = mongo_utils.unload_cursor(cursor)
     try:
         return evaluation_list
     except IndexError:
@@ -120,12 +120,12 @@ def get_workflow_evaluations_by_name(project, workflow, name):
     """
     collection = get_evaluation_collection(project)
     arguments = []
-    arguments.append(db_utils.make_single_field_argument('name', name))
-    arguments.append(db_utils.make_single_field_argument('workflow', workflow))
+    arguments.append(mongo_utils.make_single_field_argument('name', name))
+    arguments.append(mongo_utils.make_single_field_argument('workflow', workflow))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    evaluation_list = db_utils.unload_cursor(cursor)
+    evaluation_list = mongo_utils.unload_cursor(cursor)
     try:
         return evaluation_list
     except IndexError:
@@ -136,10 +136,10 @@ def get_evaluations_by_name(project, name):
     """ Returns all the evaluations by name, if it exists, otherwise returns False
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('name', name)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    argument = mongo_utils.make_single_field_argument('name', name)
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    return db_utils.unload_cursor(cursor)
+    return mongo_utils.unload_cursor(cursor)
 
 
 def get_current_evaluation_by_name(project, name):
@@ -147,12 +147,12 @@ def get_current_evaluation_by_name(project, name):
     """
     collection = get_evaluation_collection(project)
     arguments = []
-    arguments.append(db_utils.make_single_field_argument('name', name))
-    arguments.append(db_utils.make_single_field_argument('remove_date', None))
+    arguments.append(mongo_utils.make_single_field_argument('name', name))
+    arguments.append(mongo_utils.make_single_field_argument('remove_date', None))
     argument = utils.merge_list_of_dicts(arguments)
-    cursor = db_utils.mongo_find_records(collection, argument=argument,
+    cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                          named_tuple=False)
-    evaluation_list = db_utils.unload_cursor(cursor)
+    evaluation_list = mongo_utils.unload_cursor(cursor)
     try:
         return evaluation_list[0]
     except IndexError:
@@ -163,12 +163,12 @@ def replace_evaluation_by_id(project, evaluation_id, evaluation):
     """Replaces the current evaluation with the new evaluation. Returns the new evaluation.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('_id', evaluation_id)
-    cursor = db_utils.mongo_replace_one(collection, evaluation, argument)
+    argument = mongo_utils.make_single_field_argument('_id', evaluation_id)
+    cursor = mongo_utils.mongo_replace_one(collection, evaluation, argument)
     if cursor.matched_count == 1:
-        cursor = db_utils.mongo_find_records(collection, argument=argument,
+        cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                              named_tuple=False)
-        evaluation_list = db_utils.unload_cursor(cursor)
+        evaluation_list = mongo_utils.unload_cursor(cursor)
         try:
             return evaluation_list[0]
         except IndexError:
@@ -181,7 +181,7 @@ def update_evaluation(project, evaluation, changes):
     """
     collection = get_evaluation_collection(project)
     evaluation_id = evaluation['_id']
-    argument = db_utils.make_single_field_argument('_id', evaluation_id)
+    argument = mongo_utils.make_single_field_argument('_id', evaluation_id)
     updates = []
     for change in changes:
         if '.' in change:
@@ -189,11 +189,11 @@ def update_evaluation(project, evaluation, changes):
             nested_value_string = 'evaluation'
             for nested_change in nested_changes:
                 nested_value_string += '["'"{0}"'"]'.format(nested_change)
-            updates.append(db_utils.make_update_argument(change, eval(nested_value_string)))
+            updates.append(mongo_utils.make_update_argument(change, eval(nested_value_string)))
         else:
-            updates.append(db_utils.make_update_argument(change, evaluation[change]))
-    update = db_utils.merge_update_args(updates)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+            updates.append(mongo_utils.make_update_argument(change, evaluation[change]))
+    update = mongo_utils.merge_update_args(updates)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     if cursor.matched_count == 1:
         return get_evaluation_by_id(project, evaluation_id)
     return None
@@ -203,9 +203,9 @@ def update_evaluation_status_by_id(project, evaluation_id, status):
     """Updates the status of the evaluation with the given id to the given status.
     """
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('_id', evaluation_id)
-    update = db_utils.make_update_argument('status', status)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', evaluation_id)
+    update = mongo_utils.make_update_argument('status', status)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     return cursor
 
 
@@ -215,9 +215,9 @@ def remove_evaluation_by_id(project, evaluation_id, timestamp):
     """
     update_evaluation_status_by_id(project, evaluation_id, 'removed')
     collection = get_evaluation_collection(project)
-    argument = db_utils.make_single_field_argument('_id', evaluation_id)
-    update = db_utils.make_update_argument('remove_date', timestamp)
-    cursor = db_utils.mongo_update_one(collection, argument, update)
+    argument = mongo_utils.make_single_field_argument('_id', evaluation_id)
+    update = mongo_utils.make_update_argument('remove_date', timestamp)
+    cursor = mongo_utils.mongo_update_one(collection, argument, update)
     return cursor
 
 
