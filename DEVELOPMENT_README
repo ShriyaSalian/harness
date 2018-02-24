@@ -80,7 +80,6 @@ They are not in the python package index (yet).
 
 5. Install other python project dependencies
 
-you must ensure you have other dependencies - these are not currently automatically built.
 the project relies on the following external packages:
 
 pymongo
@@ -88,15 +87,7 @@ flask
 simplejson
 geojson
 
-To install these packages, with pip installed, copy and paste the following*:
-
-pip install pymongo flask simplejson geojson
-
-*Note: Recall that as in step 4, if a permission error is evident, use sudo to
-run pip. In this case, you would use:
-
-sudo pip install pymongo flask simplejson geojson
-
+These should be automatically installed via installation.
 ---------------------------------------------------------------------------
 
 6. Starting the project server
