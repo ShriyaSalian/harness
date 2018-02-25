@@ -1,2 +1,2 @@
-py_common,py_common,The python commons project,library,git,https://github.com/RBerkheimer/python_commons_legacy.git
-py_common,ghcn_data,The data setup project for the ghcn program,library,git,https://github.com/RBerkheimer/python_commons_legacy.git
+py_common,py_common,The python commons project,library,git,https://github.com/RBerkheimer/pythoncommons.git
+py_common,ghcn_data,The data setup project for the ghcn program,library,git,https://github.com/RBerkheimer/pythoncommons.git

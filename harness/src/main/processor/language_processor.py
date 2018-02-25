@@ -29,8 +29,8 @@ def evaluate_function(project, function):
     """
     """
     evaluation_string = get_evaluation_string(project, function)
-#    evaluation = subprocess_utils.get_Popen_output(evaluation_string)
-    subprocess_utils.run_subprocess(evaluation_string)
+    evaluation = subprocess_utils.get_Popen_output(evaluation_string)
+    #subprocess_utils.run_subprocess(evaluation_string)
     return
 
 
@@ -44,10 +44,10 @@ def get_evaluation_string(project, function):
     driver_directory += '/harness/drivers/'
     if function['language'] == 'python':
         if function['language_version'] == '2':
-            program = 'python2'
+            program = 'python'
             driver_directory += 'python_2'
         elif function['language_version'] == '3':
-            program = 'python'
+            program = 'python3'
             driver_directory += 'python_3'
         driver = driver_directory + '.py'
     evaluation_string = '{program} {driver} {project} {identifier}'.format(program=program,
