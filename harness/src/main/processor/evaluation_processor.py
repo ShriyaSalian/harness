@@ -266,7 +266,7 @@ def get_prepared_evaluation_functions(project, workflow, ordered_functions):
     return prepared_functions
 
 
-def create_evaluation(project, workflow, evaluation=None):
+def create_evaluation(project, workflow, evaluation=None, profile="standard"):
     """The basic method for creating an evaluation (evaluating a workflow).
     """
     output_dictionary = {}
@@ -288,7 +288,7 @@ def create_evaluation(project, workflow, evaluation=None):
     for function in prepared_functions:
         if has_inputs(function):
             function = update_function_inputs(project, workflow, function, record, output_dictionary)
-        result = language_processor.route_function(project, function)
+        result = language_processor.route_function(project, function, profile)
         function['output'] = function['hold_output']
         if validate_data_targets(function, result['output']):
             record = update_evaluation_record(record, result['output'],

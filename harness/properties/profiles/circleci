@@ -2,7 +2,7 @@
 properties = {project}/properties
 internal_data = {project}/data
 
-#harness properties
+#project properties
 profiles = {properties}/profiles
 records = {properties}/records
 

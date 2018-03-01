@@ -13,3 +13,7 @@ structures = {properties}/structures
 #web properties
 template = {project}/web/html
 static = {project}/web
+
+#driver properties
+python3 = python3
+python2 = python

@@ -27,6 +27,7 @@ def get_paths(profile=None):
         current = current.replace('src/main/controller', '')
         paths['static'] = current + 'web'
         paths['template'] = current + 'web/html'
+        paths['python3'] = get_profile_dictionary("standard")["python3"]
     paths['serving_static'] = False
     return paths
 
@@ -52,7 +53,7 @@ app = Flask(__name__, template_folder=template_folder,
 @app.route('/static_resources')
 def start_static_resources():
     simple_server = static_folder + '/' + 'simple_server.py'
-    server_string = 'python {simple_server} 8018'.format(simple_server=simple_server)
+    server_string = '{program} {simple_server} 8018'.format(program=paths['python3'], simple_server=simple_server)
     output = subprocess_utils.call_Popen(server_string, directory=static_folder)
     return output
 
