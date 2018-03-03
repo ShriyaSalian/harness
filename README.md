@@ -54,20 +54,22 @@ A development team is forming and outlining project goals for the 2018 summer te
 
 Harness currently runs on python 3, using fairly standard dependencies, and uses mongodb as the storage engine, serving on the default port. All PyPi dependencies, apart from the mongodb instance, are installed as part of the build. There are two other project packages, [mars](https://github.com/RBerkheimer/mars) and [pythoncommons](https://github.com/RBerkheimer/pythoncommons), that are also project dependencies. To see how to install these, check out the [circleci config file](https://github.com/RBerkheimer/harness/blob/master/.circleci/config.yml) and look at the 'run' section. To install mongodb, you can install the standard docker container, or download and run the binary distribution. There are many ways of acquiring and loading mongodb.
 
-We do recommend installing Harness in a virtual environment. To see how Harness can be installed in a standard virtualenv, take a look at the [circleci config file](https://github.com/RBerkheimer/harness/blob/master/.circleci/config.yml) file. Another good option for installation is [pipenv](https://github.com/pypa/pipenv).
-To do it with pipenv, just go into your harness directory, run 'pipenv install', 'pipenv shell', and 'pip install . --process-dependency-links'
+Once Harness is cloned, you should add a profile for your user configuration [in this directory](https://github.com/RBerkheimer/harness/tree/master/harness/properties/profiles) - there is a 'standard' configuration that will be used if no configuration is specified. To add your own, just follow the standard template (or if your executables are the same as the standard, ignore this step). The .gitignore file will make sure your profile isn't propagated to the upstream if you are working as part of the development team.
 
-Once Harness is installed, you should add a profile for your user configuration [here](https://github.com/RBerkheimer/harness/tree/master/harness/properties/profiles) - there is a 'standard' configuration that will be used if no configuration is specified. To add your own, just follow the standard template (or if your executables are the same as the standard, ignore this step). The .gitignore file will make sure your profile isn't propagated to the upstream if you are working as part of the development team.
+The most important thing to note here are python versions! Make sure your python versions are set up correctly in the standard env or virtual env you are installing to.
 
-Also, then add a config file [here](https://github.com/RBerkheimer/harness/tree/master/config) that just references the name of your profile. Again, it won't persist in the repo, but it will allow us to pass your profile name to nose to run our tests. Which brings us to the last part of this install guide - validation.
+We do recommend installing Harness in a virtual environment. To see how Harness can be installed in a standard virtualenv, and then validate, take a look at the [circleci config file](https://github.com/RBerkheimer/harness/blob/master/.circleci/config.yml) file.
 
-To validate your installation, run the tests using nose! From root, you can run
+Another good option for virtualenv installation is [pipenv](https://github.com/pypa/pipenv).
+To do it with pipenv,
+* Install pipenv (pip install pipenv).
+* Go to your harness root directory and run 'pipenv install'
+* Open your shell using 'pipenv shell'
+* Run 'pip install . --upgrade' (also run this command from the project root whenever you change your project).
+* To validate, run 'cd harness/src/test/processor && {python3} project_processor_test.py {circleci}' where {python3} stands for your python3 executable, and {circlci} represents your profile that you added in the 'profiles' directory (or just leave it blank if yours matches the standard profile).
 
-```
-nosetests -s --tc-file **config/example_cfg.ini** where example_cfg.ini is that config file you created in the last step.
-```
 
-Running nosetests does a few things to validate the system. It
+Running this project_processor_test does a lot of stuff (and prints it all as output in your terminal). It
 
 * Reads lots of property files from the properties subdirectory (check these out for yourself!)
     * header files, which define
@@ -83,10 +85,9 @@ Running nosetests does a few things to validate the system. It
 * Evaluates the test workflows
 * Validates the results of all the test workflows
 
-Once you get the results, congratulations! You've successfully installed and validated the Harness system.
+Once you get the results, congratulations! You've successfully installed and validated the Harness system. Now let's check the web controller/web UI!
 
-There is one other part of the system that we haven't looked at, however - the web controller. You can also use the web controller to run the tests, which will then produce a nice UI for harness that is hosted locally in your browswer. Instructions for that can be found in our [development guide](https://github.com/RBerkheimer/harness/blob/master/DEVELOPMENT_README).
-
+From your project root directory, navigate to harness/src/main/controller directory. From here, run '{python3} project_controller.py {profile}', where again, your profile stands for your own profile. This will bootstrap both the flask server on port 8008 and a static resources server on port 8118. Now, **first** navigate to http://localhost:8008/test_setup - we are going to run another complete system setup to validate that our controller is hooked up to our back end. When this finishes, it should display a list of text data in a JSON map on your screen. congratulations, it loaded! Now you can navigate to http://localhost:8008/ and play with the UI. Currently, only structures are implemented, and most of that page works with the back end. Try manipulating fields, templates, and structures, reloading the page, and you should see the persistence.
 
 ## License
 
