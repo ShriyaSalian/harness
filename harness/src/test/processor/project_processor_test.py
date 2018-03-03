@@ -155,7 +155,7 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('Testing evaluation of workflow multiple times: ')
     number_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times, profile=profile_dictionary)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -173,15 +173,15 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on the last evaluation of another workflow: ')
-    workflow_test.test_last_evaluation_workflow(project)
+    workflow_test.test_last_evaluation_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on a named evaluation: ')
-    workflow_test.test_named_evaluation_workflow(project)
+    workflow_test.test_named_evaluation_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     print('Testing an evaluation with a custom structure: ')
-    test_records = workflow_test.test_custom_structure_workflow(project)
+    test_records = workflow_test.test_custom_structure_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     return test_records
@@ -241,7 +241,7 @@ def test_add_function(project_name='py_common', component_name='py_common'):
     return function
 
 
-def test_workflow_setup(project, profile=None):
+def test_workflow_setup(project, profile="standard"):
     """Workflow tests relating to the test project.
     """
     if type(project) not in [dict, OrderedDict]:

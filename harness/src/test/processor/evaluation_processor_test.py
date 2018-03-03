@@ -1,12 +1,12 @@
 import harness.src.main.processor.evaluation_processor as evaluation_processor
 
 
-def test_make_evaluations(project, workflow, count=1):
+def test_make_evaluations(project, workflow, count=1, profile="standard"):
     """Creates the specified number of evaluations, returning them as a collection.
     """
     evaluations = []
     for i in range(0, count):
-        evaluations.append(test_make_evaluation(project, workflow))
+        evaluations.append(test_make_evaluation(project, workflow, profile=profile))
     return evaluations
 
 
@@ -24,10 +24,10 @@ def test_get_evaluation_record(project, evaluation):
     return record
 
 
-def test_make_evaluation(project, workflow):
+def test_make_evaluation(project, workflow, profile="standard"):
     """Tests making an evaluation with the given project and workflow.
     """
-    evaluation = evaluation_processor.create_evaluation(project, workflow)
+    evaluation = evaluation_processor.create_evaluation(project, workflow, profile=profile)
     return evaluation
 
 

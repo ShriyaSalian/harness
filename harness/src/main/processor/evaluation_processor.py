@@ -288,7 +288,7 @@ def create_evaluation(project, workflow, evaluation=None, profile="standard"):
     for function in prepared_functions:
         if has_inputs(function):
             function = update_function_inputs(project, workflow, function, record, output_dictionary)
-        result = language_processor.route_function(project, function, profile)
+        result = language_processor.route_function(project, function, profile=profile)
         function['output'] = function['hold_output']
         if validate_data_targets(function, result['output']):
             record = update_evaluation_record(record, result['output'],

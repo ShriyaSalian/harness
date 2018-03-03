@@ -240,12 +240,12 @@ def test_add_workflow_functions_from_filesystem(project, profile=None, workflow=
     return workflow
 
 
-def test_last_evaluation_workflow(project):
+def test_last_evaluation_workflow(project, profile="standard"):
     """Tests creating evaluations of a workflow using the last evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='test_last_evaluation')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -258,12 +258,12 @@ def test_last_evaluation_workflow(project):
     print('')
 
 
-def test_named_evaluation_workflow(project):
+def test_named_evaluation_workflow(project, profile="standard"):
     """Tests creating evaluations of a workflow that uses a named evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='test_named_evaluation')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -276,12 +276,12 @@ def test_named_evaluation_workflow(project):
     print('')
 
 
-def test_custom_structure_workflow(project):
+def test_custom_structure_workflow(project, profile="standard"):
     """Tests creating evaluations of a workflow that uses a named evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='get_coordinate_multiple')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
     print('Evaluations: ')
     print(evaluations)
     print('')
