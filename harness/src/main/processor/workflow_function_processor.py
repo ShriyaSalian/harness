@@ -1,4 +1,4 @@
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.model.workflow_function_model as workflow_function_model
 import harness.src.main.model.function_model as function_model
 import harness.src.main.dao.mongo.function_dao as function_dao

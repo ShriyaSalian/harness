@@ -1,9 +1,8 @@
 #common properties
-project = /users/rberkheimer/projects/gsoc/harness/harness/harness
 properties = {project}/properties
 internal_data = {project}/data
 
-#project properties
+#harness properties
 profiles = {properties}/profiles
 records = {properties}/records
 
@@ -15,5 +14,5 @@ template = {project}/web/html
 static = {project}/web
 
 #driver properties
-python3 = python3
-python2 = python
+python3 = python
+python2 = python2

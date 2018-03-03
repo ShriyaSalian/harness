@@ -5,7 +5,7 @@ import harness.src.main.processor.function_parameter_processor as function_param
 import harness.src.main.dao.mongo.function_dao as mongo_dao
 from pythoncommons import general_utils
 from collections import OrderedDict
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 
 
 def add_function_parameters(component, functions, source='filesystem', profile=None):

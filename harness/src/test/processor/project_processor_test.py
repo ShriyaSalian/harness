@@ -3,9 +3,9 @@ import harness.src.main.processor.parameter_processor as parameter_processor
 import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.processor.component_processor as component_processor
 import harness.src.main.processor.function_processor as function_processor
-from . import workflow_processor_test as workflow_test
-from . import evaluation_processor_test as evaluation_test
-from . import function_processor_test as function_test
+import harness.src.test.processor.workflow_processor_test as workflow_test
+import harness.src.test.processor.evaluation_processor_test as evaluation_test
+import harness.src.test.processor.function_processor_test as function_test
 from collections import OrderedDict
 import sys
 
@@ -155,7 +155,7 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('Testing evaluation of workflow multiple times: ')
     number_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times, profile=profile_dictionary)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -173,15 +173,15 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on the last evaluation of another workflow: ')
-    workflow_test.test_last_evaluation_workflow(project)
+    workflow_test.test_last_evaluation_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on a named evaluation: ')
-    workflow_test.test_named_evaluation_workflow(project)
+    workflow_test.test_named_evaluation_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     print('Testing an evaluation with a custom structure: ')
-    test_records = workflow_test.test_custom_structure_workflow(project)
+    test_records = workflow_test.test_custom_structure_workflow(project, profile=profile_dictionary)
     print('')
     print('')
     return test_records
@@ -241,7 +241,7 @@ def test_add_function(project_name='py_common', component_name='py_common'):
     return function
 
 
-def test_workflow_setup(project, profile=None):
+def test_workflow_setup(project, profile="standard"):
     """Workflow tests relating to the test project.
     """
     if type(project) not in [dict, OrderedDict]:
@@ -249,9 +249,9 @@ def test_workflow_setup(project, profile=None):
     test_workflows = workflow_test.test_add_workflows_from_filesystem(project, profile=profile)
     return test_workflows
 
+
 if __name__ == '__main__':
     print('Running main routine of project processor test')
-#    test_workflow_setup('py_common', profile='berkheimer')
     x = None
     try:
         x = sys.argv[1]
@@ -261,13 +261,4 @@ if __name__ == '__main__':
         perform_fresh_filesystem_setup(profile=x)
     else:
         perform_fresh_filesystem_setup()
-#    project = get_project_for_testing('py_common')
-#    add_parameters_to_test_project('berkheimer')
-#    test_get_parameter_tree()
-#    test_get_components()
-    #    test_print_function()
-#    update_component_status_test_function(test_project)
-    #    test_print_function(test_project)
-#    component_updater_test_function()
-    # test_print_function()
     print('End of test')

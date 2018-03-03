@@ -1,5 +1,5 @@
 import harness.src.main.dao.mongo.language_dao as language_dao
-import harness.src.main.dao.filesystem.filesystem_dao as file_dao
+import harness.src.main.processor.generic_processor as generic_processor
 from pythoncommons import subprocess_utils
 import os
 
@@ -10,9 +10,9 @@ def route_function(project, function, profile="standard"):
     """
     project = project['database']
     if function['scope'] == 'internal':
-        return route_internal_function(project, function, profile)
+        return route_internal_function(project, function, profile=profile)
     elif function['scope'] == 'external':
-        return route_external_function(project, function, profile)
+        return route_external_function(project, function, profile=profile)
 
 
 def route_internal_function(project, function, profile="standard"):
@@ -20,7 +20,7 @@ def route_internal_function(project, function, profile="standard"):
     Returns the ouptut of each function.
     """
     function = serialize_function(project, function)
-    evaluate_function(project, function)
+    evaluate_function(project, function, profile=profile)
     function_id = function['_id']
     updated_function = language_dao.get_function_by_id(project, function_id)
     return updated_function['result']
@@ -31,7 +31,11 @@ def get_program_executable(language, version, profile="standard"):
     Uses a profile to do a lookup for a given system.
     """
     if isinstance(profile, str):
-        profile = file_dao.get_dictionary_by_profile(profile)
+        print("profile!!!!")
+        print(profile)
+        profile = generic_processor.get_fully_qualified_profile_from_filesystem(profile)
+        print("profile!!!!!")
+        print(profile)
     if language == 'python':
         if version == '2':
             program = profile['python2']
@@ -66,10 +70,9 @@ def get_program_directory(language, version):
 def evaluate_function(project, function, profile="standard"):
     """
     """
-    evaluation_string = get_evaluation_string(project, function, profile)
+    evaluation_string = get_evaluation_string(project, function, profile=profile)
     evaluation = subprocess_utils.get_Popen_output(evaluation_string)
-    # subprocess_utils.run_subprocess(evaluation_string)
-    return
+    return evaluation
 
 
 def get_evaluation_string(project, function, profile="standard"):
@@ -77,7 +80,7 @@ def get_evaluation_string(project, function, profile="standard"):
     language, language type, and function object id.
     """
     identifier = str(function['_id'])
-    program = get_program_executable(function['language'], function['language_version'], profile)
+    program = get_program_executable(function['language'], function['language_version'], profile=profile)
     driver_directory = get_program_directory(function['language'], function['language_version'])
     driver = get_program_driver(driver_directory, function['language'])
     evaluation_string = '{program} {driver} {project} {identifier}'.format(program=program,

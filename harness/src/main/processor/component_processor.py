@@ -4,7 +4,7 @@ import harness.src.main.model.component_model as component_model
 import harness.src.main.processor.function_processor as function_processor
 from pythoncommons import general_utils
 from collections import OrderedDict
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 
 
 def enable_components(database, components, parameter='id'):
