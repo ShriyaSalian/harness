@@ -15,11 +15,9 @@ def get_function_by_id(project, function_id):
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
                                             named_tuple=False)
     function_list = mongo_utils.unload_cursor(cursor)
-    print('found function list: ', function_list)
     try:
         return function_list[0]
     except IndexError:
-        print('Could not find function in driver.')
         return None
 
 
@@ -60,7 +58,7 @@ def get_language_collection(project):
 
 
 def evaluate_python_3_code(project, code_id):
-    """ The main entry point for evaluation of python_2 code.
+    """ The main entry point for evaluation of python_3 code.
     Uses a code id to first find and load the function, subsequently processing it.
     Once the function is processed, the function record is updated in the database
     and control of the program should be returned to the caller.
@@ -72,7 +70,7 @@ def evaluate_python_3_code(project, code_id):
         function = update_function(project, function, changes=['result'])
     elif function['type'] == 'module':
         evaluate_python_module(function)
-    return 1
+    return function
 
 
 def add_system_paths(paths):
@@ -122,9 +120,7 @@ def evaluate_python_function(function):
     """
     method_result = None
     inputs = function['inputs']
-    print("inputs: ", inputs)
     output = function['output']
-    print("output: ", output)
     includes = function['includes']
     results = {}
     results['info'] = {}
@@ -135,22 +131,16 @@ def evaluate_python_function(function):
     if includes:
         add_system_paths(includes)
     module = get_module(function['module'], function['location'])
-    print(module)
     method = getattr(module, function['function'])
-    print(method)
     if method:
         input_string = get_input_string(inputs)
-        print(input_string)
         eval_string = 'method({0})'.format(input_string)
-        # print('.')
         start = time.time()
         try:
-            print(eval_string)
             method_result = eval(eval_string)
-            # print('.')
             results['info']['success'] = True
-        except:
-            print('driver eval failed.')
+        except (KeyError, ValueError):
+            print('Python3 Function Evaluation Driver Failure.')
             results['info']['success'] = False
         end = time.time()
         if method_result:
@@ -162,9 +152,15 @@ def evaluate_python_function(function):
 
 def evaluate_python_module(module_path, inputs=None, includes=None):
     """Evaluates a python module using an operating system call. Returns
-    the output.
+    the output. (Not currently implemented)
     """
-    pass
+    return None
+
+
+def apply(project, function):
+    """Applies the python3 function in the given project.
+    """
+    return evaluate_python_3_code(project, function)
 
 
 if __name__ == '__main__':
