@@ -107,7 +107,7 @@ def test_updating_workflow_function_parameter(project, workflow):
                                                                      function, parameter,
                                                                      target)
     elif workflow['name'] == 'test_chained':
-        print('testing chained workflow!!!')
+        print('testing chained workflow')
         function = functions[1]
         parameter = 'lower_bound'
         source = {}
@@ -227,7 +227,7 @@ def test_updating_workflow_function_parameter(project, workflow):
     return workflow
 
 
-def test_add_workflow_functions_from_filesystem(project, profile=None, workflow=None):
+def test_add_workflow_functions_from_filesystem(project, profile='standard', workflow=None):
     """Tests adding functions from a project to a given workflow.
     """
     functions = workflow_function_processor.get_workflow_functions_from_filesystem(project,
@@ -333,6 +333,7 @@ def test_add_workflows_from_filesystem(project, profile=None):
     for workflow in test_workflows:
         new_workflows.append(test_updating_workflow_function_parameter(project, workflow))
     return new_workflows
+
 
 if __name__ == '__main__':
     print('Please use workflow processor test as test package.')

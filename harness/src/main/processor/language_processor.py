@@ -31,11 +31,7 @@ def get_program_executable(language, version, profile="standard"):
     Uses a profile to do a lookup for a given system.
     """
     if isinstance(profile, str):
-        print("profile!!!!")
-        print(profile)
         profile = generic_processor.get_fully_qualified_profile_from_filesystem(profile)
-        print("profile!!!!!")
-        print(profile)
     if language == 'python':
         if version == '2':
             program = profile['python2']
@@ -71,6 +67,7 @@ def evaluate_function(project, function, profile="standard"):
     """
     """
     evaluation_string = get_evaluation_string(project, function, profile=profile)
+    print('.')
     evaluation = subprocess_utils.get_Popen_output(evaluation_string)
     return evaluation
 

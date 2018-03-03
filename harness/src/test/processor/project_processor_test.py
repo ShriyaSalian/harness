@@ -155,7 +155,7 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('Testing evaluation of workflow multiple times: ')
     number_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times, profile=profile_dictionary)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times, profile=profile)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -255,7 +255,7 @@ if __name__ == '__main__':
     x = None
     try:
         x = sys.argv[1]
-    except:
+    except IndexError:
         pass
     if x:
         perform_fresh_filesystem_setup(profile=x)
