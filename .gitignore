@@ -42,6 +42,7 @@ Thumbs.db
 #############
 build
 dist
+Pipfile.lock
 
 #Distribution specific#
 #######################
