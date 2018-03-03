@@ -38,7 +38,6 @@ def get_serving_static():
     return False
 
 
-profile = "standard"
 serving_static = get_serving_static()
 paths = get_paths()
 template_folder = get_template_folder(paths)
@@ -50,32 +49,26 @@ app = Flask(__name__, template_folder=template_folder,
 
 @app.route('/static_resources')
 def start_static_resources():
-    print(paths['profile'])
-    profile = get_profile_dictionary(paths['profile'])
-    print(profile)
     simple_server = static_folder + '/' + 'simple_server.py'
-    server_string = '{program} {simple_server} 8018'.format(program=profile['python3'], simple_server=simple_server)
+    server_string = '{program} {simple_server} 8018'.format(program='python', simple_server=simple_server)
     output = subprocess_utils.call_Popen(server_string, directory=static_folder)
     return output
 
 
 @app.route("/")
 def information():
+    if not paths['serving_static']:
+        try:
+            start_static_resources()
+            paths['serving_static'] = True
+        except:
+            pass
     return render_template("index.html")
 
 
 @app.route("/test_setup/<profile>")
 def project_test_setup(profile):
-    print("profile!")
-    print(profile)
     test_result = processor_test.perform_fresh_filesystem_setup(profile=profile)
-    if not paths['serving_static']:
-        try:
-            paths['profile'] = profile
-            start_static_resources()
-            paths['serving_static'] = True
-        except:
-            pass
     return generic_model.JSONEncoder().encode(test_result)
 
 
