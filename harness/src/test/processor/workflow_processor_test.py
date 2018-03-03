@@ -1,7 +1,7 @@
 import harness.src.main.processor.workflow_processor as workflow_processor
 import harness.src.main.processor.workflow_function_processor as workflow_function_processor
 import harness.src.main.processor.workflow_parameter_processor as parameter_processor
-from . import evaluation_processor_test as evaluation_test
+import harness.src.test.processor.evaluation_processor_test as evaluation_test
 
 
 def test_updating_workflow_function_parameter(project, workflow):

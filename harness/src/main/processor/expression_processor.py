@@ -1,5 +1,5 @@
 import harness.src.main.model.expression_model as expression_model
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 from pythoncommons import general_utils
 from collections import deque, OrderedDict
 from copy import deepcopy

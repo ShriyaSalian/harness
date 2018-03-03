@@ -3,9 +3,9 @@ import harness.src.main.processor.parameter_processor as parameter_processor
 import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.processor.component_processor as component_processor
 import harness.src.main.processor.function_processor as function_processor
-from . import workflow_processor_test as workflow_test
-from . import evaluation_processor_test as evaluation_test
-from . import function_processor_test as function_test
+import harness.src.test.processor.workflow_processor_test as workflow_test
+import harness.src.test.processor.evaluation_processor_test as evaluation_test
+import harness.src.test.processor.function_processor_test as function_test
 from collections import OrderedDict
 import sys
 
@@ -248,6 +248,7 @@ def test_workflow_setup(project, profile=None):
         project = project_processor.get_project_by_name(project)
     test_workflows = workflow_test.test_add_workflows_from_filesystem(project, profile=profile)
     return test_workflows
+
 
 if __name__ == '__main__':
     print('Running main routine of project processor test')

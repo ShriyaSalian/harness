@@ -3,7 +3,7 @@ import harness.src.main.dao.filesystem.filesystem_dao as file_dao
 import harness.src.main.model.project_model as project_model
 import harness.src.main.processor.component_processor as component_processor
 from pythoncommons import general_utils
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 
 
 def add_components_to_project_closure(source='filesystem', profile=None, components=None):

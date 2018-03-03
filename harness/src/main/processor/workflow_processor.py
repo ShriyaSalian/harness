@@ -1,6 +1,6 @@
 from pythoncommons import general_utils
 from collections import OrderedDict
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.model.workflow_model as workflow_model
 import harness.src.main.processor.workflow_function_processor as workflow_function_processor
 import harness.src.main.dao.mongo.workflow_dao as mongo_dao

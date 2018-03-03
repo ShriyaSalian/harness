@@ -1,5 +1,5 @@
 import harness.src.main.model.function_parameter_model as parameter_model
-from . import generic_processor
+import harness.src.main.processor.generic_processor as generic_processor
 
 
 def filter_parameters_by_component(component, parameters):
