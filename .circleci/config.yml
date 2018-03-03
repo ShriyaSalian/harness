@@ -33,7 +33,7 @@ jobs:
             pip install -r requirements.txt
             pip install "git+https://github.com/RBerkheimer/pythoncommons.git#egg=pythoncommons-0.0.1"
             pip install "git+https://github.com/RBerkheimer/mars.git#egg=mars-0.0.1"
-            pip install .
+            pip install . --upgrade
 
       - save_cache:
           paths:
@@ -49,6 +49,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
+            cd harness/src/test/processor && python3 project_processor_test.py circleci
     # nosetests
     # python manage.py test
 
