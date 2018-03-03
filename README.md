@@ -1,5 +1,11 @@
 # Harness
 
+## Status
+
+Version 0.0.1
+
+[![CircleCI](https://circleci.com/gh/RBerkheimer/harness.svg?style=svg)](https://circleci.com/gh/RBerkheimer/harness)
+
 ## Introduction
 Welcome to the Harness project! Harness was initially conceived as a state testing and development platform for large, complex, and evolving scientific systems.
 
