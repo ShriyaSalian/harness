@@ -4,14 +4,15 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 name = "pypi"
 
+
 [packages]
 
-flask
-bson
-pythoncommons = { git = 'https://github.com/RBerkheimer/pythoncommons.git', ref = '0.0.1', editable = false }
-mars = { git = 'https://github.com/RBerkheimer/mars.git', ref = '0.0.1', editable = false }
+flask = "*"
+bson = "*"
+pythoncommons = { git = 'https://github.com/rberkheimer/pythoncommons.git' }
+mars = { git = 'https://github.com/rberkheimer/mars.git' }
+nose = "*"
+nose-testconfig = "*"
+
 
 [dev-packages]
-
-nose
-nose-testconfig

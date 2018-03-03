@@ -11,6 +11,8 @@ setup(
           'nose-testconfig'
       ],
     dependency_links=[
+        "git+https://github.com/RBerkheimer/pythoncommons.git#egg=pythoncommons-0.0.1",
+        "git+https://github.com/RBerkheimer/mars.git#egg=mars-0.0.1"
       ],
     include_package_data=True,
     version='0.0.1',
