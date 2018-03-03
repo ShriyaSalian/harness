@@ -48,7 +48,43 @@ Current focus is on
 
 ## Development
 
-A development team is forming and outlining project goals for the 2018 summer term of the GSoC project.
+A development team is forming and outlining project goals for the 2018 summer term of the GSoC project. Please contact us - we love working with motivated individuals!
+
+## Installation
+
+Harness currently runs on python 3, using fairly standard dependencies, and uses mongodb as the storage engine, serving on the default port. All PyPi dependencies, apart from the mongodb instance, are installed as part of the build. There are two other project packages, [mars](https://github.com/RBerkheimer/mars) and [pythoncommons](https://github.com/RBerkheimer/pythoncommons), that are also project dependencies. To see how to install these, check out the [circleci config file](https://github.com/RBerkheimer/harness/blob/master/.circleci/config.yml) and look at the 'run' section. To install mongodb, you can install the standard docker container, or download and run the binary distribution. There are many ways of acquiring and loading mongodb.
+
+We do recommend installing Harness in a virtual environment. To see how Harness can be installed in a standard virtualenv, take a look at the [circleci config file](https://github.com/RBerkheimer/harness/blob/master/.circleci/config.yml) file. Another good option for installation is [pipenv](https://github.com/pypa/pipenv).
+
+Once Harness is installed, you should add a profile for your user configuration [here](https://github.com/RBerkheimer/harness/tree/master/harness/properties/profiles) - there is a 'standard' configuration that will be used if no configuration is specified. To add your own, just follow the standard template (or if your executables are the same as the standard, ignore this step). The .gitignore file will make sure your profile isn't propagated to the upstream if you are working as part of the development team.
+
+Also, then add a config file [here](https://github.com/RBerkheimer/harness/tree/master/config) that just references the name of your profile. Again, it won't persist in the repo, but it will allow us to pass your profile name to nose to run our tests. Which brings us to the last part of this install guide - validation.
+
+To validate your installation, run the tests using nose! From root, you can run
+
+```
+nosetests -s --tc-file **example_cfg.ini** where example_cfg.ini is that config file you created in the last step.
+```
+
+Running nosetests does a few things to validate the system. It
+
+* Reads lots of property files from the properties subdirectory (check these out for yourself!)
+    * header files, which define
+        * our system components
+        * our test functions from the components
+        * our test workflows based on our test functions
+        * our mars structures, which tell harness how we will be storing our data
+    * records of all our definitions
+* Create a new test harness
+* Clones two repositories into two separate harness components
+* Defines some functions on these components
+* Defines several workflows against these functions
+* Evaluates the test workflows
+* Validates the results of all the test workflows
+
+Once you get the results, congratulations! You've successfully installed and validated the Harness system.
+
+There is one other part of the system that we haven't looked at, however - the web controller. You can also use the web controller to run the tests, which will then produce a nice UI for harness that is hosted locally in your browswer. Instructions for that can be found in our [development guide](https://github.com/RBerkheimer/harness/blob/master/DEVELOPMENT_README).
 
 
 ## License
