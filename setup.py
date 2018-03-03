@@ -6,7 +6,9 @@ setup(
           'flask',
           'bson',
           'pythoncommons',
-          'mars'
+          'mars',
+          'nose',
+          'nose-testconfig'
       ],
     dependency_links=[
       ],

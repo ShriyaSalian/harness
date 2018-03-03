@@ -63,7 +63,7 @@ Also, then add a config file [here](https://github.com/RBerkheimer/harness/tree/
 To validate your installation, run the tests using nose! From root, you can run
 
 ```
-nosetests -s --tc-file **example_cfg.ini** where example_cfg.ini is that config file you created in the last step.
+nosetests -s --tc-file **config/example_cfg.ini** where example_cfg.ini is that config file you created in the last step.
 ```
 
 Running nosetests does a few things to validate the system. It

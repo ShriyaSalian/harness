@@ -251,7 +251,6 @@ def test_workflow_setup(project, profile=None):
 
 if __name__ == '__main__':
     print('Running main routine of project processor test')
-#    test_workflow_setup('py_common', profile='berkheimer')
     x = None
     try:
         x = sys.argv[1]
@@ -261,13 +260,4 @@ if __name__ == '__main__':
         perform_fresh_filesystem_setup(profile=x)
     else:
         perform_fresh_filesystem_setup()
-#    project = get_project_for_testing('py_common')
-#    add_parameters_to_test_project('berkheimer')
-#    test_get_parameter_tree()
-#    test_get_components()
-    #    test_print_function()
-#    update_component_status_test_function(test_project)
-    #    test_print_function(test_project)
-#    component_updater_test_function()
-    # test_print_function()
     print('End of test')
