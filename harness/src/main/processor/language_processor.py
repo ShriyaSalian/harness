@@ -1,7 +1,9 @@
 import harness.src.main.dao.mongo.language_dao as language_dao
 import harness.src.main.processor.generic_processor as generic_processor
-from pythoncommons import subprocess_utils
+# from pythoncommons import subprocess_utils
 import os
+import subprocess
+# import time
 
 
 def route_function(project, function, profile="standard"):
@@ -67,9 +69,13 @@ def evaluate_function(project, function, profile="standard"):
     """
     """
     evaluation_string = get_evaluation_string(project, function, profile=profile)
-    print('.')
-    evaluation = subprocess_utils.get_Popen_output(evaluation_string)
-    return evaluation
+    print(project)
+    print(evaluation_string)
+    # evaluation = subprocess_utils.get_Popen_output(evaluation_string)
+    evaluation = subprocess.run(evaluation_string.split(' '))
+    print(evaluation)
+    # time.sleep(1)
+    # return evaluation
 
 
 def get_evaluation_string(project, function, profile="standard"):

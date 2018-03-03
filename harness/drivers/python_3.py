@@ -13,11 +13,13 @@ def get_function_by_id(project, function_id):
     collection = get_language_collection(project)
     argument = mongo_utils.make_single_field_argument('_id', function_id)
     cursor = mongo_utils.mongo_find_records(collection, argument=argument,
-                                         named_tuple=False)
+                                            named_tuple=False)
     function_list = mongo_utils.unload_cursor(cursor)
+    print('found function list: ', function_list)
     try:
         return function_list[0]
     except IndexError:
+        print('Could not find function in driver.')
         return None
 
 
@@ -120,7 +122,9 @@ def evaluate_python_function(function):
     """
     method_result = None
     inputs = function['inputs']
+    print("inputs: ", inputs)
     output = function['output']
+    print("output: ", output)
     includes = function['includes']
     results = {}
     results['info'] = {}
@@ -131,15 +135,22 @@ def evaluate_python_function(function):
     if includes:
         add_system_paths(includes)
     module = get_module(function['module'], function['location'])
+    print(module)
     method = getattr(module, function['function'])
+    print(method)
     if method:
         input_string = get_input_string(inputs)
+        print(input_string)
         eval_string = 'method({0})'.format(input_string)
+        # print('.')
         start = time.time()
         try:
+            print(eval_string)
             method_result = eval(eval_string)
+            # print('.')
             results['info']['success'] = True
         except:
+            print('driver eval failed.')
             results['info']['success'] = False
         end = time.time()
         if method_result:
