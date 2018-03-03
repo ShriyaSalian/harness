@@ -17,7 +17,9 @@ Harness attempts to provide a solution to managing these dynamic systems by ster
 
 All parts of a harness (components, functions, workflows, evaluations) are then historically versioned and tracked as a whole. These collection of state outputs are stored in well defined structures called 'mars' structures - this makes it easy to compare state output as the system which produces it changes over time.
 
-The project has been presented at both Earth Science Information Partners (ESIP) and PyCon, and has an available white paper.
+The project has been [presented](https://www.youtube.com/watch?v=ehXGM8idcAY) at both [Earth Science Information Partners (ESIP)](http://commons.esipfed.org/node/9131) and [PyCon](https://us.pycon.org/2016/schedule/presentation/2021/), and has an available [white paper](http://commons.esipfed.org/sites/default/files/Harness_WhitePaper.pdf).
+
+![harness](reference/Harness_PyCon.png?raw=true "Original Harness Poster - February 2016")
 
 ## Status
 
@@ -47,6 +49,7 @@ Current focus is on
 ## Development
 
 A development team is forming and outlining project goals for the 2018 summer term of the GSoC project.
+
 
 ## License
 
