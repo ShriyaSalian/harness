@@ -14,6 +14,7 @@ def test_print_function(project_name='py_common'):
     """Simple test function to test removing, adding, disabling, enabling components.
     """
     project = project_processor.get_project_for_testing(project_name)
+    print('version bump.')
     print('Testing component actions on project: ', project['name'])
     print('All components: ')
     print(project_processor.get_all_components(project=project))
