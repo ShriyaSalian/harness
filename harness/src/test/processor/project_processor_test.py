@@ -14,6 +14,7 @@ def test_print_function(project_name='py_common'):
     """Simple test function to test removing, adding, disabling, enabling components.
     """
     project = project_processor.get_project_for_testing(project_name)
+    print('version bump.')
     print('Testing component actions on project: ', project['name'])
     print('All components: ')
     print(project_processor.get_all_components(project=project))
@@ -155,7 +156,7 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('Testing evaluation of workflow multiple times: ')
     number_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times, profile=profile_dictionary)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=number_times)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -173,15 +174,15 @@ def perform_fresh_filesystem_setup(profile='standard'):
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on the last evaluation of another workflow: ')
-    workflow_test.test_last_evaluation_workflow(project, profile=profile_dictionary)
+    workflow_test.test_last_evaluation_workflow(project)
     print('')
     print('')
     print('Testing evaluation of a workflow that is dependent on a named evaluation: ')
-    workflow_test.test_named_evaluation_workflow(project, profile=profile_dictionary)
+    workflow_test.test_named_evaluation_workflow(project)
     print('')
     print('')
     print('Testing an evaluation with a custom structure: ')
-    test_records = workflow_test.test_custom_structure_workflow(project, profile=profile_dictionary)
+    test_records = workflow_test.test_custom_structure_workflow(project)
     print('')
     print('')
     return test_records
@@ -255,7 +256,7 @@ if __name__ == '__main__':
     x = None
     try:
         x = sys.argv[1]
-    except:
+    except IndexError:
         pass
     if x:
         perform_fresh_filesystem_setup(profile=x)

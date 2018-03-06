@@ -228,5 +228,12 @@ def make_functions_from_metadata(profile):
     return functions
 
 
+def get_ordered_functions(functions):
+    """Returns an ordered set of functions based on the 'order' property.
+    """
+    ordered_functions = general_utils.sort_dictionary_list_on_key(functions, 'order')
+    return ordered_functions
+
+
 if __name__ == '__main__':
     print('Please use function processor module as method package.')

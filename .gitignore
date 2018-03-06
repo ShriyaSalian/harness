@@ -9,6 +9,9 @@
 *.mod
 *.pyc
 
+# Save Web Stuff #
+
+
 # Packages #
 ############
 # it's better to unpack these files and commit the raw source
@@ -52,3 +55,5 @@ harness/data
 harness/local/*
 harness/harness.egg-info/*
 harness.egg-info/*
+
+!harness/web/*

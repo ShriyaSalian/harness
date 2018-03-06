@@ -7,10 +7,7 @@ import harness.src.test.processor.evaluation_processor_test as evaluation_test
 def test_updating_workflow_function_parameter(project, workflow):
     """Tests updating workflow function parameters for various test scenarios.
     """
-    print('workflow: ')
-    print(workflow)
-    print('')
-    functions = workflow['functions']
+    functions = workflow_function_processor.get_ordered_functions(workflow)
     if workflow['name'] == 'get_coordinate_multiple':
         target_1 = {}
         target_1['type'] = 'Coordinate.default'
@@ -107,8 +104,8 @@ def test_updating_workflow_function_parameter(project, workflow):
                                                                      function, parameter,
                                                                      target)
     elif workflow['name'] == 'test_chained':
-        print('testing chained workflow!!!')
-        function = functions[1]
+        print('testing chained workflow')
+        function = functions[0]
         parameter = 'lower_bound'
         source = {}
         source['source'] = 'direct'
@@ -137,12 +134,21 @@ def test_updating_workflow_function_parameter(project, workflow):
         workflow = parameter_processor.update_workflow_input_target(project, workflow,
                                                                     function, parameter,
                                                                     target)
-        function = functions[0]
+
+        parameter = 'random_integer'
+        target = {}
+        target['name'] = 'random_integer'
+        target['type'] = 'integer'
+        workflow = parameter_processor.update_workflow_output_target(project, workflow,
+                                                                     function, parameter,
+                                                                     target)
+
+        function = functions[1]
         parameter = 'month_index'
         source = {}
         source['source'] = 'function'
-        source['source_id'] = functions[1]['function']
-        source['workflow_id'] = functions[1]['unique_id']
+        source['source_id'] = functions[0]['function']
+        source['workflow_id'] = functions[0]['unique_id']
         source['parameter'] = 'random_integer'
         source['source_type'] = 'output'
         workflow = parameter_processor.update_workflow_input_source(project, workflow,
@@ -154,15 +160,7 @@ def test_updating_workflow_function_parameter(project, workflow):
         workflow = parameter_processor.update_workflow_input_target(project, workflow,
                                                                     function, parameter,
                                                                     target)
-        function = functions[1]
-        parameter = 'random_integer'
-        target = {}
-        target['name'] = 'random_integer'
-        target['type'] = 'integer'
-        workflow = parameter_processor.update_workflow_output_target(project, workflow,
-                                                                     function, parameter,
-                                                                     target)
-        function = functions[0]
+
         parameter = 'month'
         target = {}
         target['name'] = 'month'
@@ -227,7 +225,7 @@ def test_updating_workflow_function_parameter(project, workflow):
     return workflow
 
 
-def test_add_workflow_functions_from_filesystem(project, profile=None, workflow=None):
+def test_add_workflow_functions_from_filesystem(project, profile='standard', workflow=None):
     """Tests adding functions from a project to a given workflow.
     """
     functions = workflow_function_processor.get_workflow_functions_from_filesystem(project,
@@ -240,12 +238,12 @@ def test_add_workflow_functions_from_filesystem(project, profile=None, workflow=
     return workflow
 
 
-def test_last_evaluation_workflow(project, profile="standard"):
+def test_last_evaluation_workflow(project):
     """Tests creating evaluations of a workflow using the last evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='test_last_evaluation')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -258,12 +256,12 @@ def test_last_evaluation_workflow(project, profile="standard"):
     print('')
 
 
-def test_named_evaluation_workflow(project, profile="standard"):
+def test_named_evaluation_workflow(project):
     """Tests creating evaluations of a workflow that uses a named evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='test_named_evaluation')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times,)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -276,12 +274,12 @@ def test_named_evaluation_workflow(project, profile="standard"):
     print('')
 
 
-def test_custom_structure_workflow(project, profile="standard"):
+def test_custom_structure_workflow(project):
     """Tests creating evaluations of a workflow that uses a named evaluation of a workflow.
     """
     test_workflow = workflow_processor.get_workflow(project, workflow_name='get_coordinate_multiple')
     num_times = 10
-    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times, profile=profile)
+    evaluations = evaluation_test.test_make_evaluations(project, test_workflow, count=num_times)
     print('Evaluations: ')
     print(evaluations)
     print('')
@@ -333,6 +331,7 @@ def test_add_workflows_from_filesystem(project, profile=None):
     for workflow in test_workflows:
         new_workflows.append(test_updating_workflow_function_parameter(project, workflow))
     return new_workflows
+
 
 if __name__ == '__main__':
     print('Please use workflow processor test as test package.')

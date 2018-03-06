@@ -1,93 +1,45 @@
 import harness.src.main.dao.mongo.language_dao as language_dao
-import harness.src.main.processor.generic_processor as generic_processor
-from pythoncommons import subprocess_utils
-import os
+import harness.src.main.drivers.python_3 as python_3
+import harness.src.main.drivers.python_2 as python_2
 
 
-def route_function(project, function, profile="standard"):
+def route_function(project, function):
     """Routes functions to the proper scope router (internal or external).
     Returns the output of each function.
     """
     project = project['database']
     if function['scope'] == 'internal':
-        return route_internal_function(project, function, profile=profile)
+        return route_internal_function(project, function)
     elif function['scope'] == 'external':
-        return route_external_function(project, function, profile=profile)
+        return route_external_function(project, function)
 
 
-def route_internal_function(project, function, profile="standard"):
+def route_internal_function(project, function):
     """Routes internal functions to the proper language driver.
     Returns the ouptut of each function.
     """
     function = serialize_function(project, function)
-    evaluate_function(project, function, profile=profile)
-    function_id = function['_id']
-    updated_function = language_dao.get_function_by_id(project, function_id)
-    return updated_function['result']
+    function = evaluate_function(project, function)
+    return function['result']
 
 
-def get_program_executable(language, version, profile="standard"):
+def get_driver(language, version):
     """Returns the proper executable for a given language and version.
-    Uses a profile to do a lookup for a given system.
     """
-    if isinstance(profile, str):
-        print("profile!!!!")
-        print(profile)
-        profile = generic_processor.get_fully_qualified_profile_from_filesystem(profile)
-        print("profile!!!!!")
-        print(profile)
     if language == 'python':
         if version == '2':
-            program = profile['python2']
+            return python_2
         elif version == '3':
-            program = profile['python3']
-    return program
+            return python_3
+    return None
 
 
-def get_program_driver(driver_directory, language):
-    """Returns the entire qualified path to the proper language driver.
-    """
-    if language == 'python':
-        driver = driver_directory + '.py'
-    return driver
-
-
-def get_program_directory(language, version):
-    """Returns the proper endpoint pointing to where a particular
-    language driver lives.
-    """
-    current_directory = os.getcwd()
-    driver_directory = current_directory.rsplit('/harness/', 1)[0]
-    driver_directory += '/harness/drivers/'
-    if language == 'python':
-        if version == '2':
-            driver_directory += 'python_2'
-        elif version == '3':
-            driver_directory += 'python_3'
-    return driver_directory
-
-
-def evaluate_function(project, function, profile="standard"):
+def evaluate_function(project, function):
     """
     """
-    evaluation_string = get_evaluation_string(project, function, profile=profile)
-    evaluation = subprocess_utils.get_Popen_output(evaluation_string)
+    driver = get_driver(function['language'], function['language_version'])
+    evaluation = driver.apply(project, str(function['_id']))
     return evaluation
-
-
-def get_evaluation_string(project, function, profile="standard"):
-    """Assembles an evaluation string for the given function. Based on
-    language, language type, and function object id.
-    """
-    identifier = str(function['_id'])
-    program = get_program_executable(function['language'], function['language_version'], profile=profile)
-    driver_directory = get_program_directory(function['language'], function['language_version'])
-    driver = get_program_driver(driver_directory, function['language'])
-    evaluation_string = '{program} {driver} {project} {identifier}'.format(program=program,
-                                                                           driver=driver,
-                                                                           project=project,
-                                                                           identifier=identifier)
-    return evaluation_string
 
 
 def route_external_function(project, function, profile="standard"):

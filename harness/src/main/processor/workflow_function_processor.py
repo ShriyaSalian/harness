@@ -2,6 +2,7 @@ import harness.src.main.processor.generic_processor as generic_processor
 import harness.src.main.model.workflow_function_model as workflow_function_model
 import harness.src.main.model.function_model as function_model
 import harness.src.main.dao.mongo.function_dao as function_dao
+import pythoncommons.general_utils as general_utils
 from collections import OrderedDict
 
 
@@ -67,6 +68,13 @@ def get_workflow_functions_from_filesystem(project, workflow=None, profile=None)
     workflow_functions = make_workflow_functions_from_tuples(workflow_function_tuples,
                                                              workflow=workflow)
     return workflow_functions
+
+
+def get_ordered_functions(workflow):
+    """Returns an ordered set of functions based on the 'order' property.
+    """
+    ordered_functions = general_utils.sort_dictionary_list_on_key(workflow['functions'], 'order')
+    return ordered_functions
 
 
 if __name__ == '__main__':
